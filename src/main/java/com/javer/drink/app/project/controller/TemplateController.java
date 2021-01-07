@@ -1,4 +1,4 @@
-package com.javer.DrinkAppProject.controller;
+package com.javer.drink.app.project.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

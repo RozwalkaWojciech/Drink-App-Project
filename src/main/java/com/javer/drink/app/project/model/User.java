@@ -1,4 +1,4 @@
-package com.javer.DrinkAppProject.model;
+package com.javer.drink.app.project.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

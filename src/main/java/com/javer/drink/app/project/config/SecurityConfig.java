@@ -1,4 +1,4 @@
-package com.javer.DrinkAppProject.config;
+package com.javer.drink.app.project.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +14,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
+    @Override
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withDefaultPasswordEncoder() //only for test
                 .username("user")
@@ -31,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/**").hasRole("ADMIN")
                 .and()
                 .formLogin().permitAll()

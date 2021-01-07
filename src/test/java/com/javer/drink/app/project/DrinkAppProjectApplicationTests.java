@@ -1,4 +1,4 @@
-package com.javer.DrinkAppProject;
+package com.javer.drink.app.project;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
