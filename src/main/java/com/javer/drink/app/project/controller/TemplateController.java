@@ -9,10 +9,10 @@ public class TemplateController {
 
     @GetMapping("/")
     public String start() {
-        return "age_query";
+        return "age-query";
     }
 
-    @GetMapping("/adult_check")
+    @GetMapping("/adult-check")
     public String adultCheck(@RequestParam("age") String age) {
         if (age.equals("18+")) {
             return "GOOD";
