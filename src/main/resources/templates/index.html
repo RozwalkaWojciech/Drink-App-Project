@@ -2,13 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <#include "css.ftlh">
-    <#include "js-head.ftlh">
+    <!--    <#include "css.ftlh">-->
+    <!--    <#include "js-head.ftlh">-->
 
     <meta charset="utf-8">
     <title> Drink Web App </title>
 
     <link href="css/style.css" rel="stylesheet" type="text/css">
+
+    <link src="https://use.fontawesome.com/releases/v5.6.0/css/all.css">
+    <link href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" rel="stylesheet" type="text/css">
+    <link href="https://unpkg.com/flickity@2/dist/flickity.min.css" rel="stylesheet" type="text/css">
+    <link href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -24,7 +31,8 @@
     </div>
 </section>
 
-<#include "about.ftlh">
+<!--about fragment-->
+<div th:replace="fragments/about :: about"></div>
 
 <#include "features.ftlh">
 
@@ -36,9 +44,11 @@
 
 <#include "quotes.ftlh">
 
-<#include "gallery.ftlh">
+<!--gallery fragment-->
+<div th:replace="fragments/gallery :: gallery"></div>
 
-<#include "contact.ftlh">
+<!--contact fragment-->
+<div th:replace="fragments/contact :: contact"></div>
 
 <#include "footer.ftlh">
 
