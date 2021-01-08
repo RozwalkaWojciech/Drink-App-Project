@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <#include "css.ftlh">
+    <#include "js-head.ftlh">
+
+    <meta charset="utf-8">
+    <title> Drink Web App </title>
+
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+<!--nav-bar navi-index-->
+<div th:replace="fragments/navi-index :: navi-index"></div>
+
+<section class="splash">
+    <div class="page-intro">
+        <h1 class="main-title">Welcome to Drinks Library!</h1>
+        <h2 class="main-subtitle">DRINK WEB APP</h2>
+        <a class="btn btn-solid" href="#about">CLICK ME</a>
+    </div>
+</section>
+
+<#include "about.ftlh">
+
+<#include "features.ftlh">
+
+<section class="statement">
+    <div class="container">
+        <p>Drink or not to drink.. that is the question</p>
+    </div>
+</section>
+
+<#include "quotes.ftlh">
+
+<#include "gallery.ftlh">
+
+<#include "contact.ftlh">
+
+<#include "footer.ftlh">
+
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<script src="scripts/main.js"></script>
+
+</body>
+</html>
