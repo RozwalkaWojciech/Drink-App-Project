@@ -25,4 +25,12 @@ public class TemplateController {
     public String goodbye() {
         return "goodbye";
     }
+
+    @GetMapping("/navigation")
+    public String navigation(@RequestParam("navigator") String navigator) {
+        if (navigator.equals("Login")) {
+            return "login";
+        } else
+            return "register";
+    }
 }
