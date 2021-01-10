@@ -29,8 +29,18 @@ public class TemplateController {
     @GetMapping("/navigation")
     public String navigation(@RequestParam("navigator") String navigator) {
         if (navigator.equals("Login")) {
-            return "login";
+            return "redirect:login";
         } else
-            return "register";
+            return "redirect:register";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
     }
 }
