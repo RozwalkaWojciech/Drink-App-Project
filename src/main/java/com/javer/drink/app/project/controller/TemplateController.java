@@ -1,11 +1,24 @@
 package com.javer.drink.app.project.controller;
 
+import com.javer.drink.app.project.service.UserService;
+import com.javer.drink.app.project.web.dto.UserRegistrationDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequiredArgsConstructor
 public class TemplateController {
+
+    private final UserService userService;
+
+    @ModelAttribute("user")
+    public UserRegistrationDto userRegistrationDto() {
+        return UserRegistrationDto.builder().build();
+    }
 
     @GetMapping("/")
     public String start() {
@@ -42,5 +55,11 @@ public class TemplateController {
     @GetMapping("/register")
     public String register() {
         return "register";
+    }
+
+    @PostMapping("/saveUser")
+    public String saveUser(@ModelAttribute("user") UserRegistrationDto user) {
+        userService.saveUser(user);
+        return "redirect:register";
     }
 }
