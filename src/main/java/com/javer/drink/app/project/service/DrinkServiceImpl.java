@@ -34,4 +34,9 @@ public class DrinkServiceImpl implements DrinkService {
                 .ingredientList(drinkDto.getIngredientList().stream().map(IngredientDto::dtoToIngredient).collect(Collectors.toList()))
                 .build());
     }
+
+    @Override
+    public void delete(String name) {
+        drinkRepository.delete(drinkRepository.findByName(name));
+    }
 }

@@ -6,27 +6,23 @@ import com.javer.drink.app.project.web.dto.DrinkDto;
 import com.javer.drink.app.project.web.dto.IngredientDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin-panel")
 @RequiredArgsConstructor
 public class AdminController {
 
     private final DrinkService drinkService;
 
-    @GetMapping
+    @GetMapping("/admin-panel")
     public String showAdminPanel() {
         return "admin-panel";
     }
 
-    @PostMapping
+    @PostMapping("/save-drink")
     public String saveDrink(
             @RequestParam(name = "name") String name,
             @RequestParam(name = "recipe") String recipe,
@@ -36,7 +32,7 @@ public class AdminController {
             @RequestParam(name = "category") String category,
             @RequestParam(name = "ingredient") String[] ingredient,
             @RequestParam(name = "measure") String[] measure
-            ) {
+    ) {
 
         List<IngredientDto> ingredientList = new ArrayList<>();
 
@@ -60,6 +56,14 @@ public class AdminController {
 
         drinkService.save(drinkDto);
 
+        return "admin-panel";
+    }
+
+    @PostMapping("/delete-drink")
+    public String deleteDrink(
+            @RequestParam(name = "name") String name
+    ) {
+        drinkService.delete(name);
         return "admin-panel";
     }
 }
