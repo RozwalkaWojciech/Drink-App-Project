@@ -9,5 +9,5 @@ public interface MessageService {
 
     Message save(MessageDto messageDto);
 
-    void update(Long id, String information);
+    Message update(Long id, String information);
 }

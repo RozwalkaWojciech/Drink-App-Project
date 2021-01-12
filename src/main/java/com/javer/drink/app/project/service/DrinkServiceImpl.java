@@ -7,7 +7,6 @@ import com.javer.drink.app.project.web.dto.DrinkDto;
 import com.javer.drink.app.project.web.dto.IngredientDto;
 import com.javer.drink.app.project.web.dto.MessageDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,9 +22,6 @@ public class DrinkServiceImpl implements DrinkService {
 
     @Override
     public Drink save(DrinkDto drinkDto) {
-        messageService.save(MessageDto.builder()
-                .information("BLA")
-                .build());
         messageService.leaveMessage(1L, "SAVE METHOD");
         return drinkRepository.save(Drink.builder()
                 .name(drinkDto.getName())
