@@ -26,7 +26,7 @@ public class MainController {
     @GetMapping("/adult-check")
     public String adultCheck(@RequestParam("age") String age) {
         if (age.equals("18+")) {
-            return "redirect:home";
+            return "redirect:/";
         } else {
             return "redirect:goodbye";
         }
