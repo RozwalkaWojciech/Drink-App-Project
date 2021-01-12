@@ -8,14 +8,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MainController {
 
     @GetMapping("/")
+    public String home() {
+        return "index2";
+    }
+
+    @GetMapping("/start")
     public String start() {
-        return "index";
+        return "age-query";
     }
 
     @GetMapping("/adult-check")
     public String adultCheck(@RequestParam("age") String age) {
         if (age.equals("18+")) {
-            return "index";
+            return "redirect:home";
         } else {
             return "redirect:goodbye";
         }
@@ -38,5 +43,4 @@ public class MainController {
     public String login() {
         return "login";
     }
-
 }

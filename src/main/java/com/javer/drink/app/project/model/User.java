@@ -1,5 +1,6 @@
 package com.javer.drink.app.project.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,11 +10,11 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
 
     @Id
@@ -26,7 +27,7 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(unique = true)
+
     private String email;
 
     private String password;

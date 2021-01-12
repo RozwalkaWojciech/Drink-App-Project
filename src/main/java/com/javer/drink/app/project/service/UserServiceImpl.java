@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(UserRegistrationDto userRegistrationDto) {
+    public User save(UserRegistrationDto userRegistrationDto) {
         User user = User.builder()
                 .firstName(userRegistrationDto.getFirstName())
                 .lastName(userRegistrationDto.getLastName())
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
                 .password(passwordEncoder.encode(userRegistrationDto.getPassword()))
                 .roles(Arrays.asList(Role.builder().name("USER").build()))
                 .build();
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
