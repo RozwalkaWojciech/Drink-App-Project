@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createAdmin() {
+    public void createAdmin() {
         User admin = User.builder()
                 .firstName("admin")
                 .lastName("admin")
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
                 .password(passwordEncoder.encode("admin"))
                 .roles(Arrays.asList(Role.builder().name("ADMIN").build()))
                 .build();
-        return userRepository.save(admin);
+        userRepository.save(admin);
     }
 
     @Override

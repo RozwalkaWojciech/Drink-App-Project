@@ -8,5 +8,5 @@ public interface UserService extends UserDetailsService {
 
     User save(UserRegistrationDto userRegistrationDto);
 
-    User createAdmin();
+    void createAdmin();
 }

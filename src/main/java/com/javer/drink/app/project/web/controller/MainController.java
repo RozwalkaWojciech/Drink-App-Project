@@ -40,7 +40,7 @@ public class MainController {
     @GetMapping("/navigation")
     public String navigation(@RequestParam("navigator") String navigator) {
         if (navigator.equals("Admin")) {
-            return "admin-panel";
+            return "redirect:admin-panel";
         } else
             return "redirect:registration";
     }
