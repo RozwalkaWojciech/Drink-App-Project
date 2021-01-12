@@ -1,7 +1,6 @@
 package com.javer.drink.app.project.web.controller;
 
 import com.javer.drink.app.project.service.UserService;
-import com.javer.drink.app.project.web.dto.UserRegistrationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,8 +39,8 @@ public class MainController {
 
     @GetMapping("/navigation")
     public String navigation(@RequestParam("navigator") String navigator) {
-        if (navigator.equals("Login")) {
-            return "redirect:login";
+        if (navigator.equals("Admin")) {
+            return "admin-panel";
         } else
             return "redirect:registration";
     }
