@@ -5,7 +5,6 @@ import com.javer.drink.app.project.model.Drink;
 import com.javer.drink.app.project.repository.DrinkRepository;
 import com.javer.drink.app.project.web.dto.DrinkDto;
 import com.javer.drink.app.project.web.dto.IngredientDto;
-import com.javer.drink.app.project.web.dto.MessageDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -15,6 +15,11 @@ public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
 
     @Override
+    public Message get(Long id) {
+        return messageRepository.getMessageById(id).orElseThrow();
+    }
+
+    @Override
     public void leaveMessage(Long id, String information) {
         MessageDto messageDto = MessageDto.builder()
                 .id(id)

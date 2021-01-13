@@ -1,11 +1,13 @@
 package com.javer.drink.app.project.web.controller;
 
 import com.javer.drink.app.project.service.DrinkService;
+import com.javer.drink.app.project.service.MessageService;
 import com.javer.drink.app.project.web.dto.CategoryDto;
 import com.javer.drink.app.project.web.dto.DrinkDto;
 import com.javer.drink.app.project.web.dto.IngredientDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ import java.util.List;
 public class AdminController {
 
     private final DrinkService drinkService;
+
+    private final MessageService messageService;
 
     @GetMapping("/admin-panel")
     public String showAdminPanel() {
@@ -31,7 +35,8 @@ public class AdminController {
             @RequestParam(name = "imageUrl") String imageUrl,
             @RequestParam(name = "category") String category,
             @RequestParam(name = "ingredient") String[] ingredient,
-            @RequestParam(name = "measure") String[] measure
+            @RequestParam(name = "measure") String[] measure,
+            Model model
     ) {
 
         List<IngredientDto> ingredientList = new ArrayList<>();
@@ -55,6 +60,7 @@ public class AdminController {
         drinkDto.setIngredientList(ingredientList);
 
         drinkService.save(drinkDto);
+        model.addAttribute("message", messageService.get(1L).getInformation());
 
         return "admin-panel";
     }
