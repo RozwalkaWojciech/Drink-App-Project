@@ -22,7 +22,7 @@ public class DrinkDto {
     private CategoryDto category;
     private List<IngredientDto> ingredientList;
 
-    public static DrinkDto drinkToDTO(Drink drink) {
+    public static DrinkDto drinkToDto(Drink drink) {
         DrinkDto drinkDTO = new DrinkDto();
         drinkDTO.setId(drink.getId());
         drinkDTO.setName(drink.getName());
