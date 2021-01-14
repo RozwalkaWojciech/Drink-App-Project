@@ -67,9 +67,11 @@ public class AdminController {
 
     @PostMapping("/delete-drink")
     public String deleteDrink(
-            @RequestParam(name = "name") String name
+            @RequestParam(name = "name") String name,
+            Model model
     ) {
         drinkService.delete(name);
+        model.addAttribute("message", messageService.get(1L).getInformation());
         return "admin-panel";
     }
 }

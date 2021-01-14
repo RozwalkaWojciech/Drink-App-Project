@@ -20,26 +20,36 @@ public class DrinkServiceImpl implements DrinkService {
     private final MessageService messageService;
 
     @Override
-    public Drink save(DrinkDto drinkDto) {
-        messageService.leaveMessage(1L, "SAVE METHOD");
-        return drinkRepository.save(Drink.builder()
-                .name(drinkDto.getName())
-                .isCustom(true)
-                .isApproved(true)
-                .recipe(drinkDto.getRecipe())
-                .drinkType(drinkDto.getDrinkType())
-                .glassType(drinkDto.getGlassType())
-                .modificationDate(String.valueOf(LocalDate.now()))
-                .imageUrl(drinkDto.getImageUrl())
-                .category(Category.builder()
-                        .name(drinkDto.getCategory().getName())
-                        .build())
-                .ingredientList(drinkDto.getIngredientList().stream().map(IngredientDto::dtoToIngredient).collect(Collectors.toList()))
-                .build());
+    public void save(DrinkDto drinkDto) {
+        String drinkDtoName = drinkDto.getName();
+        if (drinkRepository.findByName(drinkDtoName) != null) {
+            messageService.leaveMessage(1L, "Drink called '" + drinkDtoName + "' already exists!");
+        } else {
+            messageService.leaveMessage(1L, "Drink called '" + drinkDtoName + "' has been added!");
+            drinkRepository.save(Drink.builder()
+                    .name(drinkDto.getName())
+                    .isCustom(true)
+                    .isApproved(true)
+                    .recipe(drinkDto.getRecipe())
+                    .drinkType(drinkDto.getDrinkType())
+                    .glassType(drinkDto.getGlassType())
+                    .modificationDate(String.valueOf(LocalDate.now()))
+                    .imageUrl(drinkDto.getImageUrl())
+                    .category(Category.builder()
+                            .name(drinkDto.getCategory().getName())
+                            .build())
+                    .ingredientList(drinkDto.getIngredientList().stream().map(IngredientDto::dtoToIngredient).collect(Collectors.toList()))
+                    .build());
+        }
     }
 
     @Override
     public void delete(String name) {
-        drinkRepository.delete(drinkRepository.findByName(name));
+        if (drinkRepository.findByName(name) == null) {
+            messageService.leaveMessage(1L, "Drink called '" + name + "' does not exist!");
+        } else {
+            messageService.leaveMessage(1L, "Drink called '" + name + "' has been deleted!");
+            drinkRepository.delete(drinkRepository.findByName(name));
+        }
     }
 }
