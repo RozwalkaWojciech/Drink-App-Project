@@ -62,6 +62,7 @@ public class AdminController {
 
         drinkService.save(drinkDto);
         model.addAttribute("message", messageService.get(1L).getInformation());
+        model.addAttribute("drinks",drinkService.getAllDrinks());
 
         return "admin-panel";
     }
@@ -73,6 +74,8 @@ public class AdminController {
     ) {
         drinkService.delete(name);
         model.addAttribute("message", messageService.get(1L).getInformation());
+        model.addAttribute("drinks",drinkService.getAllDrinks());
+
         return "admin-panel";
     }
 }
