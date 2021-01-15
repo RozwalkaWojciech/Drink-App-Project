@@ -16,7 +16,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Message get(Long id) {
-        return messageRepository.getMessageById(id).orElseThrow();
+        return messageRepository.getById(id).orElseThrow();
     }
 
     @Override
@@ -26,7 +26,7 @@ public class MessageServiceImpl implements MessageService {
                 .information(information)
                 .build();
 
-        if (messageRepository.getMessageById(id).isEmpty()) {
+        if (messageRepository.getById(id).isEmpty()) {
             save(messageDto);
         } else {
             update(id, information);
@@ -43,7 +43,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public void update(Long id, String information) {
-        Optional<Message> message = messageRepository.getMessageById(id);
+        Optional<Message> message = messageRepository.getById(id);
         if (message.isPresent()) {
             message.get().setInformation(information);
             messageRepository.save(message.get());
