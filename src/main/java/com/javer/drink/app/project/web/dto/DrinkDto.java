@@ -2,12 +2,18 @@ package com.javer.drink.app.project.web.dto;
 
 import com.javer.drink.app.project.model.Drink;
 import com.javer.drink.app.project.model.Ingredient;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class DrinkDto {
 
     private Long id;

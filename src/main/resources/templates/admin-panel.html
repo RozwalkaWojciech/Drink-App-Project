@@ -50,9 +50,9 @@
                 <fieldset>
                     <legend> Fill all fields</legend>
 
-                    <label for="names-choice">Name: <input list="drink-names" id="name-choice" type="text" name="name"
-                                                           placeholder="*name should be unique" required
-                                                           autocomplete="off"/><br/></label>
+                    <label for="names-choice"> Name: <input list="drink-names" id="name-choice" type="text" name="name"
+                                                            placeholder="*name should be unique" required
+                                                            autocomplete="off"/><br/></label>
 
                     <datalist id="drink-names">
                         <option th:each="drink : ${drinks}" th:value="${drink.getName()}">
@@ -63,7 +63,7 @@
                                                                   autocomplete="off"/><br/></label>
 
                     <datalist id="categories">
-                        <option th:each="category : ${categories}" th:value="category">
+                        <option th:each="category : ${categories}" th:value="${category}">
                     </datalist>
 
 
@@ -72,7 +72,7 @@
                                                             autocomplete="off"/><br/></label>
 
                     <datalist id="glasses">
-                        <option th:each="glass : ${glasses}" th:value="glass">
+                        <option th:each="glass : ${glasses}" th:value="${glass}">
                     </datalist>
 
                     <label for="image-choice"> Image <input id="image-choice" type="url" name="imageUrl"
@@ -95,8 +95,8 @@
                         </tr>
                         <tr ng-repeat="item in list" ng-click="$last && addItem()">
                             <td><input list="ingredients" type="text" name="ingredient" ng-model="item.ingredient"
-                                       required></td>
-                            <td><input type="text" name="measure" ng-model="item.measure"></td>
+                                       required autocomplete="off"></td>
+                            <td><input type="text" name="measure" ng-model="item.measure" autocomplete="off"></td>
                             <td ng-if="!$first">
                                 <button ng-click="list.splice($index, 1)"> -</button>
                             </td>
@@ -104,31 +104,22 @@
                     </table>
 
                     <datalist id="ingredients">
-                        <option th:each="ingredient : ${ingredients}" th:value="ingredient">
+                        <option th:each="ingredient : ${ingredients}" th:value="${ingredient}">
                     </datalist>
 
-                    <br/><br/><br/>
+                    <br/>
 
                     <div class="upload-btn-wrapper">
                         <input class="btn2" type="submit" name="save" value="save"/><br/><br/>
                     </div>
 
-                    <br/>
-
-
                 </fieldset>
-
             </form>
-
         </figure>
-
-
-        <figure class="add-drink"></figure>
     </div>
 </section>
 
 <!--<#include "login.ftlh">-->
-
 
 <!--REMOVE DRINK VIEW-->
 <section class="add" id="remove">
@@ -148,27 +139,13 @@
                 <fieldset>
                     <legend> Choose a drink to remove</legend>
 
-                    <label for="names-choice">Name: <br/><input list="names" id="names-choice" type="text" name="name"
-                                                                required/><br/></label>
+                    <label for="names-choice"> Name: <br/><input list="drink-names" id="names-choice" type="text"
+                                                                 name="name"
+                                                                 required autocomplete="off"/><br/></label>
 
-                    <datalist id="names">
-                        <#if drinks??>
-                        <#list drinks>
-                        <ul>
-                            <#items as name>
-                            <option value="${name.getName()}">
-                            </
-                            #items>
-                        </ul>
-                    </
-                    #list>
-                </
-                #if>
-                </datalist>
-
-                <div class="upload-btn-wrapper">
-                    <input class="btn2" type="submit" value="delete"/><br/><br/>
-                </div>
+                    <div class="upload-btn-wrapper">
+                        <input class="btn2" type="submit" value="delete"/><br/><br/>
+                    </div>
 
                 </fieldset>
             </form>
