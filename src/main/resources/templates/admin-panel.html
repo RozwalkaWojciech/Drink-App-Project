@@ -45,87 +45,90 @@
 
 
         <figure>
-            <form method="post" th:action="@{/save-drink}" action="#" id="mySelect">
+            <form method="post" th:action="@{/save-drink}" action="#" id="my-select">
                 <fieldset>
                     <legend> Fill all fields</legend>
 
-                    <label for="names-choice">Name: <input list="drink-names" id="names-choice" type="text" name="name"
-                                                           placeholder="*name should be unique"
-                                                           required/><br/></label>
+                    <label for="names-choice">Name: <input list="drink-names" id="name-choice" type="text" name="name"
+                                                           placeholder="*name should be unique" required
+                                                           autocomplete="off"/><br/></label>
 
                     <datalist id="drink-names">
                         <option th:each="drink : ${drinks}" th:value="${drink.getName()}">
                     </datalist>
 
                     <label for="category-choice">Category: <input list="categories" id="category-choice" type="text"
-                                                                  name="category" required/><br/></label>
+                                                                  name="category" required
+                                                                  autocomplete="off"/><br/></label>
 
                     <datalist id="categories">
                         <option th:each="drink : ${drinks}" th:value="${drink.getCategory().getName()}">
                     </datalist>
 
 
-                <label for="glass-choice">Glass: <input list="glasses" id="glass-choice" type="text"
-                                                        name="glassType" required/><br/></label>
+                    <label for="glass-choice">Glass: <input list="glasses" id="glass-choice" type="text"
+                                                            name="glassType" required
+                                                            autocomplete="off"/><br/></label>
 
-                <datalist id="glasses">
-                    <option th:each="drink : ${drinks}" th:value="${drink.getGlassType()}">
+                    <datalist id="glasses">
+                        <option th:each="drink : ${drinks}" th:value="${drink.getGlassType()}">
+                    </datalist>
+
+                    <label for="image-choice"> Image <input id="image-choice" type="url" name="imageUrl"
+                                                            required autocomplete="off"/><br/></label>
+
+                    Alcoholic:
+                    <label style="float: right"> <input type="radio" name="drinkType" value="Non alcoholic"
+                                                        required> No </label>
+                    <label style="float: right"> <input type="radio" name="drinkType" value="Alcoholic"
+                                                        required> Yes </label><br/>
+
+                    <label for="recipe-choice"> Recipe: <textarea id="recipe-choice" name="recipe"
+                                                                 style="width: 185px; height: 120px; float: right"
+                                                                 required></textarea></label><br/>
+
+                    <table>
+                        <tr>
+                            <td> Ingredient </td>
+                            <td> Measures< /td>
+                        </tr>
+                        <tr ng-repeat="item in list" ng-click="$last && addItem()">
+                            <td><input list="ingredients" type="text" name="ingredient" ng-model="item.ingredient"
+                                       required></td>
+                            <td><input type="text" name="measure" ng-model="item.measure"></td>
+                            <td ng-if="!$first">
+                                <button ng-click="list.splice($index, 1)"> -</button>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <datalist id="ingredients">
+                        <#if ingredients??>
+                        <#list ingredients>
+                        <ul>
+                            <#items as ingredient>
+                            <option value="${ingredient}">
+                            </
+                            #items>
+                        </ul>
+                    </
+                    #list>
+                </
+                #if>
                 </datalist>
 
-            <label for="image-choice"> Image <input id="image-choice" type="url" name="imageUrl" required/><br/></label>
+                <br/><br/><br/>
 
-            Alcoholic:
-            <label style="float: right"> <input type="radio" name="drinkType" value="Non alcoholic"
-                                                required> No </label>
-            <label style="float: right"> <input type="radio" name="drinkType" value="Alcoholic" required>
-                Yes</label><br/>
+                <div class="upload-btn-wrapper">
+                    <input class="btn2" type="submit" name="save" value="save"/><br/><br/>
+                </div>
 
-            <label for="recipe-choice">Recipe: <textarea id="recipe-choice" name="recipe"
-                                                         style="width: 185px; height: 120px; float: right"
-                                                         required></textarea></label><br/>
-
-            <table>
-                <tr>
-                    <td>Ingredient</td>
-                    <td>Measures</td>
-                </tr>
-                <tr ng-repeat="item in list" ng-click="$last && addItem()">
-                    <td><input list="ingredients" type="text" name="ingredient" ng-model="item.ingredient"
-                               required></td>
-                    <td><input type="text" name="measure" ng-model="item.measure"></td>
-                    <td ng-if="!$first">
-                        <button ng-click="list.splice($index, 1)"> - </button>
-                    </td>
-                </tr>
-            </table>
-
-            <datalist id="ingredients">
-                <#if ingredients??>
-                <#list ingredients>
-                <ul>
-                    <#items as ingredient>
-                    <option value="${ingredient}">
-                    </
-                    #items>
-                </ul>
-            </
-            #list>
-        </
-        #if>
-        </datalist>
-
-        <br/><br/><br/>
-
-        <div class="upload-btn-wrapper">
-            <input class="btn2" type="submit" name="save" value="save"/><br/><br/>
-        </div>
-
-        <br/>
+                <br/>
 
 
-        </fieldset>
+                </fieldset>
 
-        </form>
+            </form>
 
         </figure>
 

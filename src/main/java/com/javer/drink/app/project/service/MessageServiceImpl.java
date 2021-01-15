@@ -42,12 +42,11 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public Message update(Long id, String information) {
+    public void update(Long id, String information) {
         Optional<Message> message = messageRepository.getMessageById(id);
         if (message.isPresent()) {
             message.get().setInformation(information);
-            return messageRepository.save(message.get());
+            messageRepository.save(message.get());
         }
-        return null;
     }
 }

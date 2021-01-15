@@ -11,5 +11,5 @@ public interface MessageService {
 
     Message save(MessageDto messageDto);
 
-    Message update(Long id, String information);
+    void update(Long id, String information);
 }

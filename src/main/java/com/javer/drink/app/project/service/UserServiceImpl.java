@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
                 .lastName(userRegistrationDto.getLastName())
                 .email(userRegistrationDto.getEmail())
                 .password(passwordEncoder.encode(userRegistrationDto.getPassword()))
-                .roles(Arrays.asList(Role.builder().name("USER").build()))
+                .roles(Collections.singletonList(Role.builder().name("USER").build()))
                 .build();
         return userRepository.save(user);
     }
@@ -47,13 +47,13 @@ public class UserServiceImpl implements UserService {
                 .lastName("admin")
                 .email("admin@admin")
                 .password(passwordEncoder.encode("admin"))
-                .roles(Arrays.asList(Role.builder().name("ADMIN").build()))
+                .roles(Collections.singletonList(Role.builder().name("ADMIN").build()))
                 .build();
         userRepository.save(admin);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password");
