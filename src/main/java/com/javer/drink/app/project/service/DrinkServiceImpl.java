@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,5 +58,10 @@ public class DrinkServiceImpl implements DrinkService {
     @Override
     public List<Drink> getAllDrinks() {
         return drinkRepository.findAll();
+    }
+
+    @Override
+    public Set<String> getUniqueGlass() {
+        return drinkRepository.findAll().stream().map(Drink::getGlassType).collect(Collectors.toSet());
     }
 }

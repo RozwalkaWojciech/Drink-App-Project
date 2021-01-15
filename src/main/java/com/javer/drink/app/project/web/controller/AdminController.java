@@ -1,5 +1,6 @@
 package com.javer.drink.app.project.web.controller;
 
+import com.javer.drink.app.project.service.CategoryService;
 import com.javer.drink.app.project.service.DrinkService;
 import com.javer.drink.app.project.service.MessageService;
 import com.javer.drink.app.project.web.dto.CategoryDto;
@@ -21,9 +22,13 @@ public class AdminController {
 
     private final MessageService messageService;
 
+    private final CategoryService categoryService;
+
     @GetMapping("/admin-panel")
     public String showAdminPanel(Model model) {
-        model.addAttribute("drinks",drinkService.getAllDrinks());
+        model.addAttribute("drinks", drinkService.getAllDrinks());
+        model.addAttribute("categories", categoryService.getUniqueCategoryNames());
+        model.addAttribute("glasses", drinkService.getUniqueGlass());
         return "admin-panel";
     }
 
@@ -62,7 +67,9 @@ public class AdminController {
 
         drinkService.save(drinkDto);
         model.addAttribute("message", messageService.get(1L).getInformation());
-        model.addAttribute("drinks",drinkService.getAllDrinks());
+        model.addAttribute("drinks", drinkService.getAllDrinks());
+        model.addAttribute("categories", categoryService.getUniqueCategoryNames());
+        model.addAttribute("glasses", drinkService.getUniqueGlass());
 
         return "admin-panel";
     }
@@ -74,7 +81,9 @@ public class AdminController {
     ) {
         drinkService.delete(name);
         model.addAttribute("message", messageService.get(1L).getInformation());
-        model.addAttribute("drinks",drinkService.getAllDrinks());
+        model.addAttribute("drinks", drinkService.getAllDrinks());
+        model.addAttribute("categories", categoryService.getUniqueCategoryNames());
+        model.addAttribute("glasses", drinkService.getUniqueGlass());
 
         return "admin-panel";
     }

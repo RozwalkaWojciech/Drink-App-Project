@@ -4,6 +4,7 @@ import com.javer.drink.app.project.model.Drink;
 import com.javer.drink.app.project.web.dto.DrinkDto;
 
 import java.util.List;
+import java.util.Set;
 
 public interface DrinkService {
 
@@ -12,4 +13,6 @@ public interface DrinkService {
     void delete(String name);
 
     List<Drink> getAllDrinks();
+
+    Set<String> getUniqueGlass();
 }

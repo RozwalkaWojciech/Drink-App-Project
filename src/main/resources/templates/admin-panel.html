@@ -28,6 +28,7 @@
                 </div>
             </form>
         </div>
+    </div>
 </section>
 
 
@@ -62,7 +63,7 @@
                                                                   autocomplete="off"/><br/></label>
 
                     <datalist id="categories">
-                        <option th:each="drink : ${drinks}" th:value="${drink.getCategory().getName()}">
+                        <option th:each="category : ${categories}" th:value="category">
                     </datalist>
 
 
@@ -71,7 +72,7 @@
                                                             autocomplete="off"/><br/></label>
 
                     <datalist id="glasses">
-                        <option th:each="drink : ${drinks}" th:value="${drink.getGlassType()}">
+                        <option th:each="glass : ${glasses}" th:value="glass">
                     </datalist>
 
                     <label for="image-choice"> Image <input id="image-choice" type="url" name="imageUrl"
@@ -84,13 +85,13 @@
                                                         required> Yes </label><br/>
 
                     <label for="recipe-choice"> Recipe: <textarea id="recipe-choice" name="recipe"
-                                                                 style="width: 185px; height: 120px; float: right"
-                                                                 required></textarea></label><br/>
+                                                                  style="width: 185px; height: 120px; float: right"
+                                                                  required></textarea></label><br/>
 
                     <table>
                         <tr>
-                            <td> Ingredient </td>
-                            <td> Measures< /td>
+                            <td> Ingredient</td>
+                            <td> Measures</td>
                         </tr>
                         <tr ng-repeat="item in list" ng-click="$last && addItem()">
                             <td><input list="ingredients" type="text" name="ingredient" ng-model="item.ingredient"
@@ -103,27 +104,16 @@
                     </table>
 
                     <datalist id="ingredients">
-                        <#if ingredients??>
-                        <#list ingredients>
-                        <ul>
-                            <#items as ingredient>
-                            <option value="${ingredient}">
-                            </
-                            #items>
-                        </ul>
-                    </
-                    #list>
-                </
-                #if>
-                </datalist>
+                        <option th:each="ingredient : ${ingredients}" th:value="ingredient">
+                    </datalist>
 
-                <br/><br/><br/>
+                    <br/><br/><br/>
 
-                <div class="upload-btn-wrapper">
-                    <input class="btn2" type="submit" name="save" value="save"/><br/><br/>
-                </div>
+                    <div class="upload-btn-wrapper">
+                        <input class="btn2" type="submit" name="save" value="save"/><br/><br/>
+                    </div>
 
-                <br/>
+                    <br/>
 
 
                 </fieldset>
