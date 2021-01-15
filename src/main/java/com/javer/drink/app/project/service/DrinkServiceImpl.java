@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,5 +52,10 @@ public class DrinkServiceImpl implements DrinkService {
             messageService.leaveMessage(1L, "Drink called '" + name + "' has been deleted!");
             drinkRepository.delete(drinkRepository.findByName(name));
         }
+    }
+
+    @Override
+    public List<Drink> getAllDrinks() {
+        return drinkRepository.findAll();
     }
 }

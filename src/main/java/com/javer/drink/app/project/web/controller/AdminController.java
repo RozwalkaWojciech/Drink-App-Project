@@ -22,7 +22,8 @@ public class AdminController {
     private final MessageService messageService;
 
     @GetMapping("/admin-panel")
-    public String showAdminPanel() {
+    public String showAdminPanel(Model model) {
+        model.addAttribute("drinks",drinkService.getAllDrinks());
         return "admin-panel";
     }
 

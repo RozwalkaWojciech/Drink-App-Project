@@ -9,11 +9,11 @@
 <div th:replace="fragments/navi-admin :: navi-admin"></div>
 
 <section class="splash" id="load"
-         style="background-image: url(static/img/admin-splash.jpeg);">
+         style="background-image: url('https://images.pexels.com/photos/339696/pexels-photo-339696.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');">
 
     <div class="page-intro">
         <div class="container">
-            <h1 class="main-title">Admin Panel</h1>
+            <h1 class="main-title"> Admin Panel </h1>
             <h2 class="main-subtitle" style="color: #eb0000" th:text="${message}"></h2>
 
 
@@ -53,19 +53,10 @@
                                                            placeholder="*name should be unique"
                                                            required/><br/></label>
 
-                    <datalist id="names">
-                        <#if drinks??>
-                        <#list drinks>
+                    <datalist id="names" th:each="drink : ${drinks}">
                         <ul>
-                            <#items as name>
-                            <option value="${name.getName()}">
-                            </
-                            #items>
+                            <option th:value="${drink.getName()}">
                         </ul>
-                    </
-                    #list>
-                </
-                #if>
                 </datalist>
 
                 <label for="category-choice">Category: <input list="categories" id="category-choice" type="text"
