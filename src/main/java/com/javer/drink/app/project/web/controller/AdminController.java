@@ -2,6 +2,7 @@ package com.javer.drink.app.project.web.controller;
 
 import com.javer.drink.app.project.service.CategoryService;
 import com.javer.drink.app.project.service.DrinkService;
+import com.javer.drink.app.project.service.IngredientService;
 import com.javer.drink.app.project.service.MessageService;
 import com.javer.drink.app.project.web.dto.CategoryDto;
 import com.javer.drink.app.project.web.dto.DrinkDto;
@@ -9,7 +10,9 @@ import com.javer.drink.app.project.web.dto.IngredientDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +22,13 @@ import java.util.List;
 public class AdminController {
 
     private final DrinkService drinkService;
-
     private final MessageService messageService;
-
     private final CategoryService categoryService;
+    private final IngredientService ingredientService;
 
     @GetMapping("/admin-panel")
     public String showAdminPanel(Model model) {
-        model.addAttribute("drinks", drinkService.getAllDrinks());
-        model.addAttribute("categories", categoryService.getUniqueCategoryNames());
-        model.addAttribute("glasses", drinkService.getUniqueGlass());
+        addAttributes(model);
         return "admin-panel";
     }
 
@@ -44,33 +44,9 @@ public class AdminController {
             @RequestParam(name = "measure") String[] measure,
             Model model
     ) {
-
-        List<IngredientDto> ingredientList = new ArrayList<>();
-
-        for (int ing = 0; ing < ingredient.length; ing++) {
-            IngredientDto ingredientDto = new IngredientDto();
-            ingredientDto.setName(ingredient[ing]);
-            ingredientDto.setMeasure(measure[ing]);
-            ingredientList.add(ingredientDto);
-        }
-
-        DrinkDto drinkDto = new DrinkDto();
-        drinkDto.setName(name);
-        drinkDto.setIsCustom(true);
-        drinkDto.setIsApproved(true);
-        drinkDto.setRecipe(recipe);
-        drinkDto.setDrinkType(drinkType);
-        drinkDto.setGlassType(glassType);
-        drinkDto.setImageUrl(imageUrl);
-        drinkDto.setCategory(CategoryDto.builder().name(category).build());
-        drinkDto.setIngredientList(ingredientList);
-
-        drinkService.save(drinkDto);
+        drinkService.save(newDrinkDto(name, recipe, drinkType, glassType, imageUrl, category, newIngredientDtoList(ingredient, measure)));
+        addAttributes(model);
         model.addAttribute("message", messageService.get(1L).getInformation());
-        model.addAttribute("drinks", drinkService.getAllDrinks());
-        model.addAttribute("categories", categoryService.getUniqueCategoryNames());
-        model.addAttribute("glasses", drinkService.getUniqueGlass());
-
         return "admin-panel";
     }
 
@@ -80,11 +56,41 @@ public class AdminController {
             Model model
     ) {
         drinkService.delete(name);
+        addAttributes(model);
         model.addAttribute("message", messageService.get(1L).getInformation());
+        return "admin-panel";
+    }
+
+    private void addAttributes(Model model) {
         model.addAttribute("drinks", drinkService.getAllDrinks());
         model.addAttribute("categories", categoryService.getUniqueCategoryNames());
         model.addAttribute("glasses", drinkService.getUniqueGlass());
+        model.addAttribute("ingredients", ingredientService.getUniqueIngredientNames());
+    }
 
-        return "admin-panel";
+    private List<IngredientDto> newIngredientDtoList(String[] ingredient, String[] measure) {
+        List<IngredientDto> ingredientDtoList = new ArrayList<>();
+        for (int ing = 0; ing < ingredient.length; ing++) {
+            ingredientDtoList.add(IngredientDto.builder()
+                    .name(ingredient[ing])
+                    .measure(measure[ing])
+                    .build());
+        }
+        return ingredientDtoList;
+    }
+
+    private DrinkDto newDrinkDto(String name, String recipe, String drinkType, String glassType, String imageUrl,
+                                 String category, List<IngredientDto> ingredientList) {
+        return DrinkDto.builder()
+                .name(name)
+                .isCustom(true)
+                .isApproved(true)
+                .recipe(recipe)
+                .drinkType(drinkType)
+                .glassType(glassType)
+                .imageUrl(imageUrl)
+                .category(CategoryDto.builder().name(category).build())
+                .ingredientList(ingredientList)
+                .build();
     }
 }
