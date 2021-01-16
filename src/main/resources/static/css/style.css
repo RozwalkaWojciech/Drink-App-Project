@@ -38,7 +38,7 @@ section {
     margin: 24px 0 0 0;
 }
 
-.container1 {
+.drink {
     flex: 0 0 45.33333%;
     max-width: 90%;
     text-align: center;
@@ -223,7 +223,7 @@ section.gallery {
     transition: all 0.5s;
 }
 
-.add-drink1 {
+.drink-recipe {
     position: static;
     margin: 0;
     flex: 0 0 45%;
