@@ -10,7 +10,7 @@
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><i class="fa fa-fw fa-user"></i>
                     Logout</a></li>
 
-                <form action="Drink-view" method="get">
+                <form action="/drink" method="get">
                     <input name="name" list="drink-names" class="search" type="text" placeholder="Search.."
                            onfocus="this.placeholder=''"
                            onblur="this.placeholder='Search...'" required autocomplete="off">

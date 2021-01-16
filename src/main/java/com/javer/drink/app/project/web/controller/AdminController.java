@@ -43,7 +43,7 @@ public class AdminController {
         try {
             fileDataHandlerService.dataUploadHandler(jsonFile);
         } catch (IOException e) {
-            log.error("BOOM");
+            log.error("The file wasn't loaded");
         }
         addAttributes(model);
         model.addAttribute("message", messageService.get(1L).getInformation());
