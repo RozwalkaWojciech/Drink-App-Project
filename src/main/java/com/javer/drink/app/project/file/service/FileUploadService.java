@@ -1,7 +1,6 @@
-package com.javer.drink.app.project.file;
+package com.javer.drink.app.project.file.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.RequestScope;
 
 import javax.servlet.http.Part;
 import java.io.File;
@@ -9,10 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.Properties;
 
 @Service
-@RequestScope
 public class FileUploadService {
 
     public File uploadFile(Part filePart) throws IOException {
@@ -27,7 +26,7 @@ public class FileUploadService {
 
     public String getUploadFilesPath() throws IOException {
         Properties settings = new Properties();
-        settings.load(Thread.currentThread().getContextClassLoader().getResource("settings.properties").openStream());
+        settings.load(Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("settings.properties")).openStream());
         return settings.getProperty("Upload.Path");
     }
 }

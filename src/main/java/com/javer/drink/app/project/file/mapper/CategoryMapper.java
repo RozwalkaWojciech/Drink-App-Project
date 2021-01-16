@@ -1,7 +1,7 @@
-package com.javer.drink.app.project.mapper;
+package com.javer.drink.app.project.file.mapper;
 
 import com.javer.drink.app.project.model.Category;
-import com.javer.drink.app.project.parser.DrinkAPI;
+import com.javer.drink.app.project.file.parser.DrinkAPI;
 import org.springframework.stereotype.Component;
 
 @Component

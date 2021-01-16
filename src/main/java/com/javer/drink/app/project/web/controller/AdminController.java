@@ -1,7 +1,6 @@
 package com.javer.drink.app.project.web.controller;
 
-import com.javer.drink.app.project.exception.UploadedFileNotFound;
-import com.javer.drink.app.project.file.FileDataHandler;
+import com.javer.drink.app.project.file.service.FileDataHandlerService;
 import com.javer.drink.app.project.service.CategoryService;
 import com.javer.drink.app.project.service.DrinkService;
 import com.javer.drink.app.project.service.IngredientService;
@@ -11,8 +10,6 @@ import com.javer.drink.app.project.web.dto.DrinkDto;
 import com.javer.drink.app.project.web.dto.IngredientDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +30,7 @@ public class AdminController {
     private final MessageService messageService;
     private final CategoryService categoryService;
     private final IngredientService ingredientService;
-    private final FileDataHandler fileDataHandler;
+    private final FileDataHandlerService fileDataHandlerService;
 
     @GetMapping("/admin-panel")
     public String showAdminPanel(Model model) {
@@ -42,12 +39,14 @@ public class AdminController {
     }
 
     @PostMapping("json-upload")
-    public String jsonUpload(@RequestParam(name = "drinks") Part jsonFile) throws IOException {
+    public String jsonUpload(@RequestParam(name = "drinks") Part jsonFile, Model model) throws IOException {
         try {
-            fileDataHandler.dataUploadHandler(jsonFile);
+            fileDataHandlerService.dataUploadHandler(jsonFile);
         } catch (IOException e) {
             log.error("BOOM");
         }
+        addAttributes(model);
+        model.addAttribute("message", messageService.get(1L).getInformation());
         return "admin-panel";
     }
 

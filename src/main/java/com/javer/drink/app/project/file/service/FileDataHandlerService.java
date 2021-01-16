@@ -1,16 +1,14 @@
-package com.javer.drink.app.project.file;
+package com.javer.drink.app.project.file.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Part;
 import java.io.IOException;
 
-@RequestScope
+@Service
 @RequiredArgsConstructor
-@Component
-public class FileDataHandler {
+public class FileDataHandlerService {
 
     private final FileParserService fileParserService;
     private final FileUploadService fileUploadService;

@@ -1,9 +1,8 @@
-package com.javer.drink.app.project.parser;
+package com.javer.drink.app.project.file.parser;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.javer.drink.app.project.file.DrinkDeserializer;
 import lombok.Data;
 
 import java.util.HashMap;
