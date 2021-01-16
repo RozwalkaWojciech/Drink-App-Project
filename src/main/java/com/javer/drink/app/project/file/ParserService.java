@@ -1,8 +1,6 @@
 package com.javer.drink.app.project.file;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javer.drink.app.project.parser.DrinkAPI;
@@ -18,19 +16,13 @@ import java.util.List;
 @Service
 public class ParserService implements Serializable {
 
-    public <T> Object parseFile(File json) {
-
-        T outputObject = null;
-
+    public List<DrinkAPI> parseFile(File json) {
+        List<DrinkAPI> outputObject = null;
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             JsonNode jsonNode = objectMapper.readTree(json);
-            outputObject = (T) objectMapper.readValue(jsonNode.get("drinks").toString(), new TypeReference<List<DrinkAPI>>() {
+            outputObject = objectMapper.readValue(jsonNode.get("drinks").toString(), new TypeReference<>() {
             });
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

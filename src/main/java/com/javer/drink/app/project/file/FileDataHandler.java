@@ -15,7 +15,7 @@ public class FileDataHandler {
     private final FileParserService fileParserService;
     private final FileUploadService fileUploadService;
 
-    public <T> Object dataUploadHandler(Part partFile) throws IOException {
-        return fileParserService.parseDataToDatabase(fileUploadService.uploadFile(partFile));
+    public void dataUploadHandler(Part partFile) throws IOException {
+        fileParserService.parseDataToDatabase(fileUploadService.uploadFile(partFile));
     }
 }

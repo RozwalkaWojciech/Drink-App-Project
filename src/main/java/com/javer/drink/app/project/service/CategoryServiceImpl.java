@@ -16,6 +16,11 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
+    public void save(Category category) {
+        categoryRepository.save(category);
+    }
+
+    @Override
     public Set<String> getUniqueCategoryNames() {
         return categoryRepository.findAll().stream().map(Category::getName).collect(Collectors.toSet());
     }
@@ -28,10 +33,5 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Optional<Category> getById(Long id) {
         return categoryRepository.findById(id);
-    }
-
-    @Override
-    public void update(Category category) {
-        categoryRepository.save(category);
     }
 }

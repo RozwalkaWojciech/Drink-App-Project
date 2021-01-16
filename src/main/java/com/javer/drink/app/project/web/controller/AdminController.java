@@ -43,13 +43,11 @@ public class AdminController {
 
     @PostMapping("json-upload")
     public String jsonUpload(@RequestParam(name = "drinks") Part jsonFile) throws IOException {
-        String fileUrl = "";
         try {
-            fileUrl = "/drinks/" + fileDataHandler.dataUploadHandler(jsonFile);
+            fileDataHandler.dataUploadHandler(jsonFile);
         } catch (IOException e) {
-          log.error("BOOM");
+            log.error("BOOM");
         }
-
         return "admin-panel";
     }
 

@@ -29,8 +29,8 @@ public class FileParserService {
     private final CategoryMapper categoryMapper;
     private final CategoryService categoryService;
 
-    public Object parseDataToDatabase(File json) {
-        List<DrinkAPI> drinkAPIList = (List<DrinkAPI>) parserService.parseFile(json);
+    public void parseDataToDatabase(File json) {
+        List<DrinkAPI> drinkAPIList = parserService.parseFile(json);
         int size = drinkAPIList.size();
         int count = 0;
         for (DrinkAPI drinkAPI : drinkAPIList) {
@@ -40,10 +40,9 @@ public class FileParserService {
                         .ofNullable(categoryService.getByName(drinkAPI.getCategory()))
                         .orElseGet(() -> categoryMapper.mapCategory(drinkAPI));
                 category.getDrinkList().add(drinkMapper.mapDrink(drinkAPI, category));
-                categoryService.update(category);
+                categoryService.save(category);
             }
         }
         messageService.leaveMessage(1L, count + " items was parsed from " + size);
-        return new Object();
     }
 }
