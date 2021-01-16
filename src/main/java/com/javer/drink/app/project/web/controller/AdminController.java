@@ -39,7 +39,7 @@ public class AdminController {
     }
 
     @PostMapping("json-upload")
-    public String jsonUpload(@RequestParam(name = "drinks") Part jsonFile, Model model) throws IOException {
+    public String jsonUpload(@RequestParam(name = "drinks") Part jsonFile, Model model) {
         try {
             fileDataHandlerService.dataUploadHandler(jsonFile);
         } catch (IOException e) {

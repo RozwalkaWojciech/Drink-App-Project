@@ -56,6 +56,11 @@ public class DrinkServiceImpl implements DrinkService {
     }
 
     @Override
+    public Drink get(String name) {
+        return drinkRepository.findByName(name);
+    }
+
+    @Override
     public List<Drink> getAllDrinks() {
         return drinkRepository.findAll();
     }

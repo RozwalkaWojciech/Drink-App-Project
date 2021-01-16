@@ -12,6 +12,8 @@ public interface DrinkService {
 
     void delete(String name);
 
+    Drink get(String name);
+
     List<Drink> getAllDrinks();
 
     Set<String> getUniqueGlass();
