@@ -24,6 +24,6 @@ public class Category {
     @Column(length = 50)
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Drink> drinkList = new ArrayList<>();
 }

@@ -31,11 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void update(Long id, Category category) {
-        Optional<Category> categoryById = getById(id);
-        if (categoryById.isPresent()) {
-            categoryById.get().setName(category.getName());
-            categoryRepository.save(categoryById.get());
-        }
+    public void update(Category category) {
+        categoryRepository.save(category);
     }
 }

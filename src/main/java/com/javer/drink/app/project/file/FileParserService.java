@@ -31,20 +31,16 @@ public class FileParserService {
 
     public Object parseDataToDatabase(File json) {
         List<DrinkAPI> drinkAPIList = (List<DrinkAPI>) parserService.parseFile(json);
-        Integer size = drinkAPIList.size();
-        Integer count = 0;
+        int size = drinkAPIList.size();
+        int count = 0;
         for (DrinkAPI drinkAPI : drinkAPIList) {
-
             if (drinkService.getAllDrinks().stream().noneMatch(drink -> drink.getName().equals(drinkAPI.getName()))) {
-
                 count++;
-
                 Category category = Optional
                         .ofNullable(categoryService.getByName(drinkAPI.getCategory()))
                         .orElseGet(() -> categoryMapper.mapCategory(drinkAPI));
-
                 category.getDrinkList().add(drinkMapper.mapDrink(drinkAPI, category));
-//                categoryService.update(category.getId(), category);
+                categoryService.update(category);
             }
         }
         messageService.leaveMessage(1L, count + " items was parsed from " + size);
