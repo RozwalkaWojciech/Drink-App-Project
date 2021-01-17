@@ -24,7 +24,7 @@ public class DrinkController {
 
     @GetMapping("favourite-drink")
     public String favouriteDrink(@RequestParam(name = "name") String name, Model model) {
-//        model.addAttribute("message", messageService.get(2L).getInformation());
-        return "drink-view";
+        model.addAttribute("message", messageService.get(1L).getInformation());
+        return "redirect:drink?name=" + name;
     }
 }
