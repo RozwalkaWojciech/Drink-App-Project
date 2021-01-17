@@ -38,9 +38,10 @@
 
         <!--        <#if favourite.isEmpty()>-->
 
-        <form action="Add-favourite?name=${drink.getName()}" method="post" style="width: 49%; float: left">
-            <input class="btn2" type="submit" name="${drink.getName()}" value="ADD FAV" style="float: right"/>
+        <form action="/favourite-drink" method="get" style="width: 49%; float: left">
+            <input class="btn2" type="submit" th:name="${drink.getName()}" value="ADD FAV" style="float: right"/>
         </form>
+
         <div style="width: 49%; float: right">
             <button onclick="pageRedirect()" class="btn2" style="float: left">Main</button>
         </div>
@@ -60,8 +61,8 @@
     <div class="page-intro">
         <div class="container">
             <h1 class="main-title" th:text="${drink.getName()}"></h1>
-            <#if message??><h2 class="main-subtitle" style="color: #eb0000"> ${message.getMessage()} </h2></
-        #if>
+            <h2 class="main-subtitle" style="color: #eb0000" th:text="${message}"></h2>
+        </div>
     </div>
 </section>
 
@@ -94,9 +95,7 @@
                 <br/>
                 <ul>
                     <li th:each="ingredient : ${drink.getIngredientList()}"
-                        th:utext="${ingredient.getName()} + ' '"
-                        th:if="${ingredient.getMeasure() != null}"
-                        th:text="${ingredient.getMeasure()}">
+                        th:text="${ingredient.getName()} + ' ' +  ${ingredient.getMeasure()}">
                     </li>
                 </ul>
             </div>
