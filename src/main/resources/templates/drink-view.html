@@ -37,19 +37,20 @@
         <br/>
 
         <!--        <#if favourite.isEmpty()>-->
-        <div th:if="fav == null" th:text="TEST">
-            <p> ADD TO FAVOURITE </p>
-            <form action="/favourite-drink" method="get" style="width: 49%; float: left">
+        <div th:if="fav == true">
+            <p th:text="ADD TO FAVOURITE"></p>
+            <form th:action="/favourite-drink" th:method="get" style="width: 49%; float: left">
                 <input class="btn2" type="submit" name="name" th:value="${drink.getName()}" style="float: right"/>
             </form>
 
             <div style="width: 49%; float: right">
                 <button onclick="pageRedirect()" class="btn2" style="float: left">Main</button>
             </div>
+
         </div>
 
         <!--        <#elseif favourite.isPresent()>-->
-        <div th:if="fav == false">
+        <div th:unless="fav == false">
             <p> REMOVE FROM FAVOURITE </p>
             <form action="/favourite-drink" method="get" style="width: 49%; float: left">
                 <input class="btn2" type="submit" th:name="name" th:value="${drink.getName()}" style="float: right"/>
