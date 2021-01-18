@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
     private final BCryptPasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository, @Lazy BCryptPasswordEncoder passwordEncoder) {
@@ -41,10 +40,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User get(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
     public void createAdmin() {
         User admin = User.builder()
-                .firstName("admin")
-                .lastName("admin")
+                .firstName("John")
+                .lastName("Wick")
                 .email("admin@admin")
                 .password(passwordEncoder.encode("admin"))
                 .roles(Collections.singletonList(Role.builder().name("ADMIN").build()))

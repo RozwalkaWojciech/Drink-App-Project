@@ -1,9 +1,10 @@
 package com.javer.drink.app.project.web.controller;
 
+import com.javer.drink.app.project.model.User;
 import com.javer.drink.app.project.service.DrinkService;
 import com.javer.drink.app.project.service.MessageService;
+import com.javer.drink.app.project.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Session;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ public class DrinkController {
 
     private final DrinkService drinkService;
     private final MessageService messageService;
+    private final UserService userService;
 
     @GetMapping("/drink")
     public String drinkView(@RequestParam(name = "name") String name, Model model) {
@@ -26,9 +28,10 @@ public class DrinkController {
         model.addAttribute("favourite", drinkService.get("Melya"));
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String name1 = authentication.getName();
-        System.out.println(authentication.getDetails().toString());
-        System.out.println(authentication.getPrincipal().toString());
+        User user = userService.get(authentication.getName());
+
+
+
         return "drink-view";
     }
 
