@@ -1,6 +1,5 @@
 package com.javer.drink.app.project.web.controller;
 
-import com.javer.drink.app.project.model.User;
 import com.javer.drink.app.project.service.DrinkService;
 import com.javer.drink.app.project.service.MessageService;
 import com.javer.drink.app.project.service.UserService;
@@ -22,22 +21,18 @@ public class DrinkController {
 
     @GetMapping("/drink")
     public String drinkView(@RequestParam(name = "name") String name, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("drink", drinkService.get(name));
         model.addAttribute("drinks", drinkService.getAllDrinks());
         model.addAttribute("message", messageService.get(1L).getInformation());
-        model.addAttribute("favourite", drinkService.get("Melya"));
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.get(authentication.getName());
-        userService.manageFavourite(name, user.getEmail());
-
+        model.addAttribute("favourite", userService.isFavourite(name, authentication.getName()));
         return "drink-view";
     }
 
     @GetMapping("favourite-drink")
-    public String favouriteDrink(@RequestParam(name = "name") String name, Model model) {
-
-
+    public String favouriteDrink(@RequestParam(name = "name") String name) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        userService.manageFavourite(name, authentication.getName());
         return "redirect:drink?name=" + name;
     }
 }
