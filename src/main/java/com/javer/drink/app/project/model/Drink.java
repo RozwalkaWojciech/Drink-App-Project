@@ -60,7 +60,4 @@ public class Drink {
             inverseJoinColumns = {@JoinColumn(name = "ingredient_id", referencedColumnName = "id")}
     )
     private List<Ingredient> ingredientList = new ArrayList<>();
-//
-//    @ManyToMany(mappedBy = "favouriteDrinkList")
-//    private List<User> users = new ArrayList<>();
 }
