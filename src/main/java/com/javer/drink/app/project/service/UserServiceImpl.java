@@ -1,5 +1,6 @@
 package com.javer.drink.app.project.service;
 
+import com.javer.drink.app.project.model.Drink;
 import com.javer.drink.app.project.model.Role;
 import com.javer.drink.app.project.model.User;
 import com.javer.drink.app.project.repository.UserRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,10 +23,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final DrinkService drinkService;
 
-    public UserServiceImpl(UserRepository userRepository, @Lazy BCryptPasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, @Lazy BCryptPasswordEncoder passwordEncoder, DrinkService drinkService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.drinkService = drinkService;
     }
 
     @Override
@@ -42,6 +46,41 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public void manageFavourite(String drinkName, String userEmail) {
+        if (isFavourite(drinkName, userEmail).isPresent()) {
+            deleteFavourite(drinkName, userEmail);
+        } else {
+            saveFavourite(drinkName, userEmail);
+        }
+    }
+
+    @Override
+    public void saveFavourite(String drinkName, String userEmail) {
+        User user = get(userEmail);
+        Collection<Drink> favouriteDrinkList = user.getFavouriteDrinkList();
+        favouriteDrinkList.add(drinkService.get(drinkName));
+        user.setFavouriteDrinkList(favouriteDrinkList);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteFavourite(String drinkName, String userEmail) {
+        User user = get(userEmail);
+        Collection<Drink> favouriteDrinkList = user.getFavouriteDrinkList();
+        favouriteDrinkList.remove(drinkService.get(drinkName));
+        user.setFavouriteDrinkList(favouriteDrinkList);
+        userRepository.save(user);
+    }
+
+    @Override
+    public Optional<Drink> isFavourite(String drinkName, String userEmail) {
+        return get(userEmail).getFavouriteDrinkList()
+                .stream()
+                .filter(drink -> drink.getName().equals(drinkName))
+                .findFirst();
     }
 
     @Override

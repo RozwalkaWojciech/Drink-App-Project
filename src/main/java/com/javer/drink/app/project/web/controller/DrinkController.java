@@ -29,15 +29,15 @@ public class DrinkController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.get(authentication.getName());
-
-
+        userService.manageFavourite(name, user.getEmail());
 
         return "drink-view";
     }
 
     @GetMapping("favourite-drink")
     public String favouriteDrink(@RequestParam(name = "name") String name, Model model) {
-        model.addAttribute("message", messageService.get(1L).getInformation());
+
+
         return "redirect:drink?name=" + name;
     }
 }
