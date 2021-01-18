@@ -36,10 +36,12 @@
         </ul>
         <br/>
 
+
+
         <!--        <#if favourite.isEmpty()>-->
-        <div th:if="fav == true">
-            <p th:text="ADD TO FAVOURITE"></p>
-            <form th:action="/favourite-drink" th:method="get" style="width: 49%; float: left">
+        <div th:if="${favourite}">
+            <p>ADD TO FAVOURITE</p>
+            <form action="/favourite-drink" method="get" style="width: 49%; float: left">
                 <input class="btn2" type="submit" name="name" th:value="${drink.getName()}" style="float: right"/>
             </form>
 
@@ -50,18 +52,24 @@
         </div>
 
         <!--        <#elseif favourite.isPresent()>-->
-        <div th:unless="fav == false">
+        <div th:unless="${favourite}">
             <p> REMOVE FROM FAVOURITE </p>
             <form action="/favourite-drink" method="get" style="width: 49%; float: left">
-                <input class="btn2" type="submit" th:name="name" th:value="${drink.getName()}" style="float: right"/>
+                <input class="btn2" type="submit" name="name" th:value="${drink.getName()}" style="float: right"/>
             </form>
             <div style="width: 49%; float: right">
                 <button onclick="pageRedirect()" class="btn2" style="float: left">Main</button>
             </div>
         </div>
 
+
+
     </div>
 </nav>
+
+
+
+
 
 <section class="splash" id="load"
          style="background-image:url('https://images.pexels.com/photos/239466/pexels-photo-239466.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');">
