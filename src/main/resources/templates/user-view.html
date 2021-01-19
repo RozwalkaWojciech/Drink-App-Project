@@ -57,7 +57,7 @@
 
     <div class="page-intro">
         <div class="container">
-            <h1 class="main-title">Welcome ${loggedUser}</h1>
+            <h1 class="main-title" th:text="'Welcome ' + ${user.getFirstName()} + ' ' + ${user.getLastName()}"></h1>
         </div>
     </div>
 </section>
@@ -87,8 +87,8 @@
     #list>
 </
 #if>
-</ul>
-</div>
+</body>
+</html>
 
 <div class="gallery-wrapper">
     <#if drinkList??>
@@ -117,27 +117,19 @@
 
 <#include "category1.ftlh">
 
-<section class="about" id="prof">
-    <div class="container">
-        <h2 class="section-title">
-            Professional searcher engine</h2>
-        <form action="search-drink" method="get" style="width: 55%">
-            <button type="submit" style="float: right"><i class="fa fa-search"></i></button>
-            <input style="float: right" pattern=".{3,}" required title="3 characters minimum" type="text"
-                   name="drinkSearch" id="drinkSearchPost" placeholder="Professional searcher engine">
-        </form>
+<!--<section class="about" id="prof">-->
+<!--    <div class="container">-->
+<!--        <h2 class="section-title">-->
+<!--            Professional searcher engine</h2>-->
+<!--        <form action="search-drink" method="get" style="width: 55%">-->
+<!--            <button type="submit" style="float: right"><i class="fa fa-search"></i></button>-->
+<!--            <input style="float: right" pattern=".{3,}" required title="3 characters minimum" type="text"-->
+<!--                   name="drinkSearch" id="drinkSearchPost" placeholder="Professional searcher engine">-->
+<!--        </form>-->
 
-    </div>
-</section>
+<!--    </div>-->
+<!--</section>-->
 
-
-<section class="statement">
-    <div class="container">
-        <p>Drink or not to drink.. that is the question</p>
-    </div>
-</section>
-
-<#include "about.ftlh">
 
 <section class="statement">
     <div class="container">
@@ -145,8 +137,20 @@
     </div>
 </section>
 
-<#include "contact.ftlh">
-<#include "footer.ftlh">
+<!--about fragment-->
+<div th:replace="fragments/about :: about"></div>
+
+<section class="statement">
+    <div class="container">
+        <p>Drink or not to drink.. that is the question</p>
+    </div>
+</section>
+
+<!--contact fragment-->
+<div th:replace="fragments/contact :: contact"></div>
+
+<!--footer fragment-->
+<div th:replace="fragments/footer :: footer"></div>
 
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 <script src="scripts/main.js"></script>

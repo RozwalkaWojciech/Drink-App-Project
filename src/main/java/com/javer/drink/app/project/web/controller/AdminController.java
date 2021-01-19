@@ -35,7 +35,6 @@ public class AdminController {
     @GetMapping("/admin-panel")
     public String showAdminPanel(Model model) {
         addAttributes(model);
-        model.addAttribute("message", messageService.get(1L));
         return "admin-panel";
     }
 
@@ -47,7 +46,6 @@ public class AdminController {
             log.error("The file wasn't loaded");
         }
         addAttributes(model);
-        model.addAttribute("message", messageService.get(1L));
         return "admin-panel";
     }
 
@@ -65,7 +63,6 @@ public class AdminController {
     ) {
         drinkService.save(newDrinkDto(name, recipe, drinkType, glassType, imageUrl, category, newIngredientDtoList(ingredient, measure)));
         addAttributes(model);
-        model.addAttribute("message", messageService.get(1L));
         return "admin-panel";
     }
 
@@ -76,7 +73,6 @@ public class AdminController {
     ) {
         drinkService.delete(name);
         addAttributes(model);
-        model.addAttribute("message", messageService.get(1L));
         return "admin-panel";
     }
 
@@ -85,6 +81,7 @@ public class AdminController {
         model.addAttribute("categories", categoryService.getUniqueCategoryNames());
         model.addAttribute("glasses", drinkService.getUniqueGlass());
         model.addAttribute("ingredients", ingredientService.getUniqueIngredientNames());
+        model.addAttribute("message", messageService.get(1L));
     }
 
     private List<IngredientDto> newIngredientDtoList(String[] ingredient, String[] measure) {
