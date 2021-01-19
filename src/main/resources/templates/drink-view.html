@@ -73,7 +73,11 @@
     <div class="page-intro">
         <div class="container">
             <h1 class="main-title" th:text="${drink.getName()}"></h1>
-            <h2 class="main-subtitle" style="color: #eb0000" th:text="${message}"></h2>
+
+            <div th:if="${message.isPresent()}">
+                <h2 class="main-subtitle" style="color: #eb0000" th:text="${message.get().getInformation()}"></h2>
+            </div>
+
         </div>
     </div>
 </section>
