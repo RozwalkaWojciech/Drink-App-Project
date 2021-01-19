@@ -34,15 +34,14 @@
                 <option th:each="drink : ${drinks}" th:value="${drink.getName()}">
             </datalist>
         </ul>
-        <br/>
 
-
-
-        <!--        <#if favourite.isEmpty()>-->
+        <!--        if favourite.isEmpty-->
         <div th:if="${favourite.isEmpty()}">
-            <p>ADD TO FAVOURITE</p>
-            <form action="/favourite-drink" method="get" style="width: 49%; float: left">
-                <input class="btn2" type="submit" name="name" th:value="${drink.getName()}" style="float: right"/>
+            <p> Add to favourites </p>
+            <form th:action="@{/favourite-drink?name={name}(name=${drink.getName()})}"
+                  th:object="${drink}"
+                  method="post" style="width: 49%; float: left">
+                <input class="btn2" type="submit" th:value="ADD" style="float: right"/>
             </form>
 
             <div style="width: 49%; float: right">
@@ -51,24 +50,22 @@
 
         </div>
 
-        <!--        <#elseif favourite.isPresent()>-->
+        <!--        elseif favourite.isPresent()>-->
         <div th:unless="${favourite.isEmpty()}">
-            <p> REMOVE FROM FAVOURITE </p>
-            <form action="/favourite-drink" method="get" style="width: 49%; float: left">
-                <input class="btn2" type="submit" name="name" th:value="${drink.getName()}" style="float: right"/>
+            <p> Remove from Favourites </p>
+            <form th:action="@{/favourite-drink?name={name}(name=${drink.getName()})}"
+                  th:object="${drink}"
+                  method="post" style="width: 49%; float: left">
+                <input class="btn2" type="submit" th:value="REMOVE" style="float: right"/>
             </form>
             <div style="width: 49%; float: right">
                 <button onclick="pageRedirect()" class="btn2" style="float: left">Main</button>
             </div>
         </div>
-
 
 
     </div>
 </nav>
-
-
-
 
 
 <section class="splash" id="load"
