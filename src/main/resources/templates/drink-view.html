@@ -39,7 +39,7 @@
 
 
         <!--        <#if favourite.isEmpty()>-->
-        <div th:if="${favourite}">
+        <div th:if="${favourite.isEmpty()}">
             <p>ADD TO FAVOURITE</p>
             <form action="/favourite-drink" method="get" style="width: 49%; float: left">
                 <input class="btn2" type="submit" name="name" th:value="${drink.getName()}" style="float: right"/>
@@ -52,7 +52,7 @@
         </div>
 
         <!--        <#elseif favourite.isPresent()>-->
-        <div th:unless="${favourite}">
+        <div th:unless="${favourite.isEmpty()}">
             <p> REMOVE FROM FAVOURITE </p>
             <form action="/favourite-drink" method="get" style="width: 49%; float: left">
                 <input class="btn2" type="submit" name="name" th:value="${drink.getName()}" style="float: right"/>
