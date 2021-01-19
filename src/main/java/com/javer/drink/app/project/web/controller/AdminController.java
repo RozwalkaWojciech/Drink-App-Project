@@ -36,7 +36,6 @@ public class AdminController {
     public String showAdminPanel(Model model) {
         addAttributes(model);
         model.addAttribute("message", messageService.get(1L));
-
         return "admin-panel";
     }
 

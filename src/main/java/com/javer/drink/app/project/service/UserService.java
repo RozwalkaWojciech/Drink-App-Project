@@ -15,7 +15,7 @@ public interface UserService extends UserDetailsService {
 
     void manageFavourite(String drinkName, String userEmail);
 
-    void saveFavourite(String drinkName, String userEmail);
+    void addFavourite(String drinkName, String userEmail);
 
     void deleteFavourite(String drinkName, String userEmail);
 

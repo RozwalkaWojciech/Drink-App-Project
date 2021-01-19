@@ -34,7 +34,6 @@ public class DrinkController {
     public String favouriteDrink(@RequestParam(name = "name") String name) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         userService.manageFavourite(name, authentication.getName());
-        messageService.leaveMessage(2L,"TEST");
         return "redirect:drink?name=" + name;
     }
 }

@@ -24,11 +24,13 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final DrinkService drinkService;
+    private final MessageService messageService;
 
-    public UserServiceImpl(UserRepository userRepository, @Lazy BCryptPasswordEncoder passwordEncoder, DrinkService drinkService) {
+    public UserServiceImpl(UserRepository userRepository, @Lazy BCryptPasswordEncoder passwordEncoder, DrinkService drinkService, MessageService messageService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.drinkService = drinkService;
+        this.messageService = messageService;
     }
 
     @Override
@@ -53,17 +55,18 @@ public class UserServiceImpl implements UserService {
         if (isFavourite(drinkName, userEmail).isPresent()) {
             deleteFavourite(drinkName, userEmail);
         } else {
-            saveFavourite(drinkName, userEmail);
+            addFavourite(drinkName, userEmail);
         }
     }
 
     @Override
-    public void saveFavourite(String drinkName, String userEmail) {
+    public void addFavourite(String drinkName, String userEmail) {
         User user = get(userEmail);
         Collection<Drink> favouriteDrinkList = user.getFavouriteDrinkList();
         favouriteDrinkList.add(drinkService.get(drinkName));
         user.setFavouriteDrinkList(favouriteDrinkList);
         userRepository.save(user);
+        messageService.leaveMessage(2L,"Drink was added to favourite");
     }
 
     @Override
@@ -73,6 +76,7 @@ public class UserServiceImpl implements UserService {
         favouriteDrinkList.remove(drinkService.get(drinkName));
         user.setFavouriteDrinkList(favouriteDrinkList);
         userRepository.save(user);
+        messageService.leaveMessage(2L, "Drink was removed from favourite");
     }
 
     @Override
