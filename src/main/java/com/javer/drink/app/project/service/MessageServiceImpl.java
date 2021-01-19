@@ -15,8 +15,8 @@ public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
 
     @Override
-    public Message get(Long id) {
-        return messageRepository.getById(id).orElseThrow();
+    public Optional<Message> get(Long id) {
+        return messageRepository.getById(id);
     }
 
     @Override
