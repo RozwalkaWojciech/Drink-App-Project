@@ -14,7 +14,10 @@
     <div class="page-intro">
         <div class="container">
             <h1 class="main-title"> Admin Panel </h1>
-            <h2 class="main-subtitle" style="color: #eb0000" th:text="${message}"></h2>
+
+            <div th:if="${message.isPresent()}">
+                <h2 class="main-subtitle" style="color: #eb0000" th:text="${message.get().getInformation()}"></h2>
+            </div>
 
             <form th:action="@{/json-upload}" method="post" enctype="multipart/form-data">
                 <div style="display: flex; flex-direction: row;">
@@ -128,7 +131,7 @@
         <figure class="gallery-item">
             <img src="https://img.wonderhowto.com/img/original/31/78/63586557575482/0/635865575754823178.jpg"
                  alt="image">
-            <figcaption> WHISKY </figcaption>
+            <figcaption> WHISKY</figcaption>
         </figure>
 
 
