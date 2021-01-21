@@ -14,12 +14,12 @@ public class MainController {
 
     @GetMapping("/")
     public String home() {
-        return "index2";
+        userService.createAdmin();
+        return "index3";
     }
 
     @GetMapping("/start")
     public String start() {
-        userService.createAdmin();
         return "age-query";
     }
 

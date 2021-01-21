@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
         favouriteDrinkList.add(drinkService.get(drinkName));
         user.setFavouriteDrinkList(favouriteDrinkList);
         userRepository.save(user);
-        messageService.leaveMessage(2L,"Drink was added to favourite");
+        messageService.leaveMessage(2L, "Drink was added to favourite");
     }
 
     @Override
@@ -89,14 +89,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createAdmin() {
-        User admin = User.builder()
-                .firstName("John")
-                .lastName("Wick")
-                .email("admin@admin")
-                .password(passwordEncoder.encode("admin"))
-                .roles(Collections.singletonList(Role.builder().name("ADMIN").build()))
-                .build();
-        userRepository.save(admin);
+        if (userRepository.findByEmail("admin@admin") == null) {
+            User admin = User.builder()
+                    .firstName("John")
+                    .lastName("Wick")
+                    .email("admin@admin")
+                    .password(passwordEncoder.encode("admin"))
+                    .roles(Collections.singletonList(Role.builder().name("ADMIN").build()))
+                    .build();
+            userRepository.save(admin);
+        }
     }
 
     @Override
