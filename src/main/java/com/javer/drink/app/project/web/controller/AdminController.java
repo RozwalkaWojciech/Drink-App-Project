@@ -26,6 +26,8 @@ import java.util.List;
 @Slf4j
 public class AdminController {
 
+    public static final String ADMIN_PANEL = "admin-panel";
+    public static final String MESSAGE = "message";
     private final DrinkService drinkService;
     private final MessageService messageService;
     private final CategoryService categoryService;
@@ -35,7 +37,8 @@ public class AdminController {
     @GetMapping("/admin-panel")
     public String showAdminPanel(Model model) {
         addAttributes(model);
-        return "admin-panel";
+        model.addAttribute(MESSAGE, messageService.get(3L));
+        return ADMIN_PANEL;
     }
 
     @PostMapping("json-upload")
@@ -46,7 +49,8 @@ public class AdminController {
             log.error("The file wasn't loaded");
         }
         addAttributes(model);
-        return "admin-panel";
+        model.addAttribute(MESSAGE, messageService.get(1L));
+        return ADMIN_PANEL;
     }
 
     @PostMapping("/save-drink")
@@ -63,7 +67,8 @@ public class AdminController {
     ) {
         drinkService.save(newDrinkDto(name, recipe, drinkType, glassType, imageUrl, category, newIngredientDtoList(ingredient, measure)));
         addAttributes(model);
-        return "admin-panel";
+        model.addAttribute(MESSAGE, messageService.get(1L));
+        return ADMIN_PANEL;
     }
 
     @PostMapping("/delete-drink")
@@ -73,7 +78,8 @@ public class AdminController {
     ) {
         drinkService.delete(name);
         addAttributes(model);
-        return "admin-panel";
+        model.addAttribute(MESSAGE, messageService.get(1L));
+        return ADMIN_PANEL;
     }
 
     private void addAttributes(Model model) {
@@ -81,7 +87,6 @@ public class AdminController {
         model.addAttribute("categories", categoryService.getUniqueCategoryNames());
         model.addAttribute("glasses", drinkService.getUniqueGlass());
         model.addAttribute("ingredients", ingredientService.getUniqueIngredientNames());
-        model.addAttribute("message", messageService.get(1L));
     }
 
     private List<IngredientDto> newIngredientDtoList(String[] ingredient, String[] measure) {

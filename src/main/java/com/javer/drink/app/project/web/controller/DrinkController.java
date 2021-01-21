@@ -25,10 +25,7 @@ public class DrinkController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("drink", drinkService.get(name));
         model.addAttribute("drinks", drinkService.getAllDrinks());
-
-        //message should be only in fav template, refactor template and delete this line
-        model.addAttribute("message", messageService.get(2L));
-
+        model.addAttribute("message", messageService.get(3L));
         model.addAttribute("favourite", userService.isFavourite(name, authentication.getName()));
         return "drink-view";
     }
@@ -37,7 +34,6 @@ public class DrinkController {
     public String favouriteDrink(@RequestParam(name = "name") String name, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         userService.manageFavourite(name, authentication.getName());
-
         model.addAttribute("drink", drinkService.get(name));
         model.addAttribute("drinks", drinkService.getAllDrinks());
         model.addAttribute("message", messageService.get(2L));
