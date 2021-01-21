@@ -29,25 +29,25 @@ public class DrinkDto {
     private List<IngredientDto> ingredientList;
 
     public static DrinkDto drinkToDto(Drink drink) {
-        DrinkDto drinkDTO = new DrinkDto();
-        drinkDTO.setId(drink.getId());
-        drinkDTO.setName(drink.getName());
-        drinkDTO.setIsCustom(drink.getIsCustom());
-        drinkDTO.setIsApproved(drink.getIsApproved());
-        drinkDTO.setRecipe(drink.getRecipe());
-        drinkDTO.setDrinkType(drink.getDrinkType());
-        drinkDTO.setGlassType(drink.getGlassType());
-        drinkDTO.setModificationDate(drink.getModificationDate());
-        drinkDTO.setImageUrl(drink.getImageUrl());
-        drinkDTO.setCategory(CategoryDto.categoryToDto(drink.getCategory()));
+        DrinkDto drinkDto = new DrinkDto();
+        drinkDto.setId(drink.getId());
+        drinkDto.setName(drink.getName());
+        drinkDto.setIsCustom(drink.getIsCustom());
+        drinkDto.setIsApproved(drink.getIsApproved());
+        drinkDto.setRecipe(drink.getRecipe());
+        drinkDto.setDrinkType(drink.getDrinkType());
+        drinkDto.setGlassType(drink.getGlassType());
+        drinkDto.setModificationDate(drink.getModificationDate());
+        drinkDto.setImageUrl(drink.getImageUrl());
+        drinkDto.setCategory(CategoryDto.categoryToDto(drink.getCategory()));
 
         List<IngredientDto> ingredientDtoList = new ArrayList<>();
         drink.getIngredientList().forEach(ingredient -> {
             IngredientDto ingredientDTO = IngredientDto.ingredientToDto(ingredient);
             ingredientDtoList.add(ingredientDTO);
         });
-        drinkDTO.setIngredientList(ingredientDtoList);
-        return drinkDTO;
+        drinkDto.setIngredientList(ingredientDtoList);
+        return drinkDto;
     }
 
     public static Drink dtoToDrink(DrinkDto drinkDTO) {
