@@ -23,6 +23,9 @@ public class DrinkController {
     @GetMapping("/drink")
     public String drinkView(@RequestParam(name = "name") String name, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getName().isEmpty()) {
+            return "redirect:login:logout";
+        }
         model.addAttribute("drink", drinkService.get(name));
         model.addAttribute("drinks", drinkService.getAllDrinks());
         model.addAttribute("message", messageService.get(3L));
