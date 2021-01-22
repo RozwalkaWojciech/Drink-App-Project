@@ -22,7 +22,7 @@ public class DrinkDeserializer extends JsonDeserializer<DrinkAPI> {
         JsonNode tree = jsonParser.readValueAsTree();
         String[] errors = {"null"};
         for (int index = 1; index < 16; index++) {
-            JsonNode ingredientNode = tree.get("strIngredient" + (char)index);
+            JsonNode ingredientNode = tree.get("strIngredient" + index);
             if (ingredientNode == null) {
                 break;
             }
