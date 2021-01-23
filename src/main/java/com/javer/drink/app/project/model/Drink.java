@@ -45,12 +45,8 @@ public class Drink {
     @Column(name = "image_url", length = 1024)
     private String imageUrl;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "drink_to_category",
-            joinColumns = {@JoinColumn(name = "drink_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id")}
-    )
+    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @JoinTable(name = "drink_to_category")
     private Category category;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)

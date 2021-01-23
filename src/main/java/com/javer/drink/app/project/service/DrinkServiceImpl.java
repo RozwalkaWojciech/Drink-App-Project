@@ -7,7 +7,9 @@ import com.javer.drink.app.project.web.dto.DrinkDto;
 import com.javer.drink.app.project.web.dto.IngredientDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.RequestScope;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
+@RequestScope
 public class DrinkServiceImpl implements DrinkService {
 
     private final DrinkRepository drinkRepository;

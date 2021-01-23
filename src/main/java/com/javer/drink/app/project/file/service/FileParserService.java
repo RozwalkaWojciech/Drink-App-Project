@@ -10,13 +10,17 @@ import com.javer.drink.app.project.service.DrinkService;
 import com.javer.drink.app.project.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.RequestScope;
 
+import javax.transaction.Transactional;
 import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@RequestScope
+@Transactional
 public class FileParserService {
 
     private final ParserService parserService;
