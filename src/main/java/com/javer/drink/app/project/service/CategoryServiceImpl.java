@@ -4,17 +4,13 @@ import com.javer.drink.app.project.model.Category;
 import com.javer.drink.app.project.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.RequestScope;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
-@RequestScope
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;

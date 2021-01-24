@@ -12,8 +12,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
-@RequestScope
 public class IngredientServiceImpl implements IngredientService {
 
     private final IngredientRepository ingredientRepository;

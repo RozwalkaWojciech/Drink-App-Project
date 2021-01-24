@@ -23,7 +23,4 @@ public class Ingredient {
     private String name;
 
     private String measure;
-
-//    @ManyToMany(mappedBy = "ingredientList")
-//    private List<Drink> drinkList = new ArrayList<>();
 }

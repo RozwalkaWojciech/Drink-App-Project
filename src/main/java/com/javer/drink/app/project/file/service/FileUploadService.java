@@ -1,7 +1,6 @@
 package com.javer.drink.app.project.file.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.RequestScope;
 
 import javax.servlet.http.Part;
 import java.io.File;
@@ -13,7 +12,6 @@ import java.util.Objects;
 import java.util.Properties;
 
 @Service
-@RequestScope
 public class FileUploadService {
 
     public File uploadFile(Part filePart) throws IOException {
