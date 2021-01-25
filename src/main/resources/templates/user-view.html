@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <!--head fragment-->
 <head th:replace="fragments/head :: head">
@@ -16,16 +15,8 @@
             <li><a href="#about"> About application </a></li>
             <li><a href="#contact"> Contacts </a></li>
 
-            <!--            dropdown navigation-->
-            <li class="dropdown" sec:authorize="isAuthenticated()"><a> Navigation </a>
-                <div class="dropdown-content">
-                    <a onclick="window.location.href='start'"> Start </a>
-                    <a onclick="window.location.href='/'"> Home </a>
-                    <a onclick="window.location.href='user-view'"> User </a>
-                    <a onclick="window.location.href='admin-panel'"> Admin </a>
-                    <a onclick="window.location.href='logout'"><i className="fa fa-fw fa-user"></i> Logout </a>
-                </div>
-            </li>
+            <!--dropdown navigation-->
+            <li th:replace="fragments/dropdown-navigation :: dropdown-navigation"></li>
 
             <form action="/drink" method="get">
                 <input name="name" list="drink-names" class="search" type="text" placeholder="Search.."
@@ -37,13 +28,7 @@
             <datalist id="drink-names">
                 <option th:each="drink : ${drinks}" th:value="${drink.getName()}">
             </datalist>
-
         </ul>
-        <br/>
-
-        <form method="get" action="/" style="float: none;">
-            <input class="btn2" type="submit" name="navigator" value="Home"/>
-        </form>
     </div>
 </nav>
 
@@ -77,18 +62,18 @@
                 </form>
             </li>
 
-<div class="gallery-wrapper">
-    <#if drinkList??>
-    <#list drinkList>
-    <#items as drink>
+            <div class="gallery-wrapper">
+                <#if drinkList??>
+                <#list drinkList>
+                <#items as drink>
 
-    <figure class="gallery-item" style="padding: 5px">
-        <img src=${drink.getImageUrl()} alt="image">
-        <a href="Drink-view?name=${drink.getName()}">
-            <figcaption>${drink.getName()}</figcaption>
-        </a>
-    </figure>
-</div>
+                <figure class="gallery-item" style="padding: 5px">
+                    <img src=${drink.getImageUrl()} alt="image">
+                    <a href="Drink-view?name=${drink.getName()}">
+                        <figcaption>${drink.getName()}</figcaption>
+                    </a>
+                </figure>
+            </div>
 </section>
 
 <#include "add-favourite.ftlh">

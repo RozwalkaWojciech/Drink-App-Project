@@ -8,7 +8,7 @@
     padding: 12px 16px;
     display: block;
     background-color: black;
-    opacity: 0.75;
+    opacity: 0.85;
     border-radius: 10px;
     font-size: 14px;
 }
@@ -23,4 +23,8 @@
 .dropdown:hover .dropdown-content {
     display: block;
     color: #227093;
+}
+
+:hover {
+    cursor: pointer;
 }

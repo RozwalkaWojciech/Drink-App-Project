@@ -1,0 +1,10 @@
+<li th:fragment="dropdown-navigation" class="dropdown" sec:authorize="isAuthenticated()"
+    xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"><a> Navigation </a>
+    <div class="dropdown-content">
+        <a onclick="window.location.href='start'"> Start </a>
+        <a onclick="window.location.href='/'"> Home </a>
+        <a onclick="window.location.href='user-view'"> User </a>
+        <a onclick="window.location.href='admin-panel'"> Admin </a>
+        <a onclick="window.location.href='logout'"><i className="fa fa-fw fa-user"></i> Logout </a>
+    </div>
+</li>
