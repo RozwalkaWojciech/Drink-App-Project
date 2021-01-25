@@ -3,15 +3,6 @@
 
 <!--head fragment-->
 <head th:replace="fragments/head :: head">
-
-    <!--    <title th:value="${drink.getName()}"></title>-->
-
-    <!--    <script>-->
-    <!--        function pageRedirect() {-->
-    <!--            window.location.href = "User-view?page=1";-->
-    <!--        }-->
-    <!--    </script>-->
-
 </head>
 <body>
 
@@ -23,13 +14,13 @@
             <li><a href="#about">About application</a></li>
             <li><a href="#contact">Contacts</a></li>
 
+            <!--            search engine-->
             <form action="/drink" method="get">
                 <input name="name" list="drink-names" class="search" placeholder="Search.."
                        onfocus="this.placeholder=''"
                        onblur="this.placeholder='Search...'" required>
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
-
             <datalist id="drink-names">
                 <option th:each="drink : ${drinks}" th:value="${drink.getName()}">
             </datalist>
@@ -41,13 +32,16 @@
             <form th:action="@{/favourite-drink?name={name}(name=${drink.getName()})}"
                   th:object="${drink}"
                   method="post" style="width: 49%; float: left">
-                <input class="btn2" type="submit" th:value="ADD" style="float: right"/>
+                <input class="btn2" type="submit" th:value="Add" style="float: right"/>
             </form>
 
             <div style="width: 49%; float: right">
-                <button onclick="pageRedirect()" class="btn2" style="float: left">Main</button>
+                <button onclick="window.location.href='/'" class="btn2" style="float: left"> Home </button>
             </div>
-
+            <form method="get" action="/navigation" style="float: none; margin-right: 20px">
+                <input class="btn2" type="submit" name="navigator" value="User"/>
+                <input class="btn2" type="submit" name="navigator" value="Admin"/>
+            </form>
         </div>
 
         <!--        elseif favourite.isPresent()>-->
@@ -56,14 +50,12 @@
             <form th:action="@{/favourite-drink?name={name}(name=${drink.getName()})}"
                   th:object="${drink}"
                   method="post" style="width: 49%; float: left">
-                <input class="btn2" type="submit" th:value="REMOVE" style="float: right"/>
+                <input class="btn2" type="submit" th:value="Remove" style="float: right"/>
             </form>
             <div style="width: 49%; float: right">
-                <button onclick="pageRedirect()" class="btn2" style="float: left">Main</button>
+                <button onclick="window.location.href='/'" class="btn2" style="float: left"> Home </button>
             </div>
         </div>
-
-
     </div>
 </nav>
 
