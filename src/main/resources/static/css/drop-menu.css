@@ -14,17 +14,18 @@
 }
 
 .dropdown-content a:hover {
-    background-color: black;
-    opacity: 0.4;
+    background-color: #eb0000;
+    opacity: 0.9;
     border-radius: 10px;
     font-size: 18px;
+    color: #fff;
+    transition: all 0.5s;
+    box-shadow: 7px 4px 12px 4px black;
+    cursor: pointer;
+
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
     color: #227093;
-}
-
-:hover {
-    cursor: pointer;
 }
