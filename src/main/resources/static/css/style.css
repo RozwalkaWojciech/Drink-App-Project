@@ -230,7 +230,7 @@ section.gallery {
     max-width: 90%;
     text-align: center;
     transition: all 0.5s;
-    list-style:none;
+    list-style: none;
 }
 
 
@@ -285,8 +285,8 @@ section.gallery {
 
 .social-links li {
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: 80px;
+    height: 80px;
     line-height: 30px;
     border-radius: 20%;
     margin-right: 50px;

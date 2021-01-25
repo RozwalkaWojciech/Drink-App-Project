@@ -42,7 +42,7 @@ public class MainController {
         if (navigator.equals("Admin")) {
             return "redirect:admin-panel";
         } else
-            return "redirect:registration";
+            return "redirect:user-view";
     }
 
     @GetMapping("/login")
