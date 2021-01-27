@@ -18,16 +18,19 @@
             <!--dropdown navigation-->
             <li th:replace="fragments/dropdown-navigation :: dropdown-navigation"></li>
 
-            <form action="/drink" method="get">
-                <input name="name" list="drink-names" class="search" type="text" placeholder="Search.."
-                       onfocus="this.placeholder=''"
-                       onblur="this.placeholder='Search...'" required autocomplete="off">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
+            <!--drink searcher-->
+            <div th:replace="fragments/search :: search"></div>
 
-            <datalist id="drink-names">
-                <option th:each="drink : ${drinks}" th:value="${drink.getName()}">
-            </datalist>
+<!--            <form action="/drink" method="get">-->
+<!--                <input name="name" list="drink-names" class="search" type="text" placeholder="Search.."-->
+<!--                       onfocus="this.placeholder=''"-->
+<!--                       onblur="this.placeholder='Search...'" required autocomplete="off">-->
+<!--                <button type="submit"><i class="fa fa-search"></i></button>-->
+<!--            </form>-->
+
+<!--            <datalist id="drink-names">-->
+<!--                <option th:each="drink : ${drinks}" th:value="${drink.getName()}">-->
+<!--            </datalist>-->
         </ul>
     </div>
 </nav>
