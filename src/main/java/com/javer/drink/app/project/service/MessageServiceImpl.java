@@ -45,8 +45,10 @@ public class MessageServiceImpl implements MessageService {
     public void update(Long id, String information) {
         Optional<Message> message = messageRepository.getById(id);
         if (message.isPresent()) {
-            message.get().setInformation(information);
-            messageRepository.save(message.get());
+            Message messageToUpdate = message.get();
+            messageToUpdate.setId(id);
+            messageToUpdate.setInformation(information);
+            messageRepository.save(messageToUpdate);
         }
     }
 }

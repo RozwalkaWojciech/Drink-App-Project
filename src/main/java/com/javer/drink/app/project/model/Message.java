@@ -18,7 +18,6 @@ import javax.persistence.Id;
 public class Message {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String information;

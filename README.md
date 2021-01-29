@@ -31,6 +31,5 @@ multi-tier architecture.
 - [ ] Integration test
 
 ## Contact
-
 ---
 [@Wojciech Rozwałka](https://www.linkedin.com/in/wojciech-rozwalka/) - feel free to contact me!
