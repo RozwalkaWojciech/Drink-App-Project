@@ -1,11 +1,9 @@
 package com.javer.drink.app.project.web.controller;
 
 import com.javer.drink.app.project.file.service.FileDataHandlerService;
-import com.javer.drink.app.project.service.CategoryService;
 import com.javer.drink.app.project.service.DrinkService;
 import com.javer.drink.app.project.service.IngredientService;
 import com.javer.drink.app.project.service.MessageService;
-import com.javer.drink.app.project.web.dto.CategoryDto;
 import com.javer.drink.app.project.web.dto.DrinkDto;
 import com.javer.drink.app.project.web.dto.IngredientDto;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +28,6 @@ public class AdminController {
     public static final String MESSAGE = "message";
     private final DrinkService drinkService;
     private final MessageService messageService;
-    private final CategoryService categoryService;
     private final IngredientService ingredientService;
     private final FileDataHandlerService fileDataHandlerService;
 
@@ -84,7 +81,7 @@ public class AdminController {
 
     private void addAttributes(Model model) {
         model.addAttribute("drinks", drinkService.getAllDrinks());
-        model.addAttribute("categories", categoryService.getUniqueCategoryNames());
+        model.addAttribute("categories", drinkService.get(""));
         model.addAttribute("glasses", drinkService.getUniqueGlass());
         model.addAttribute("ingredients", ingredientService.getUniqueIngredientNames());
     }
@@ -110,7 +107,7 @@ public class AdminController {
                 .drinkType(drinkType)
                 .glassType(glassType)
                 .imageUrl(imageUrl)
-                .category(CategoryDto.builder().name(category).build())
+                .category(category)
                 .ingredientList(ingredientList)
                 .build();
     }
