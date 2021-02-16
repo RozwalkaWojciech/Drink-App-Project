@@ -66,4 +66,9 @@ public class DrinkServiceImpl implements DrinkService {
     public Set<String> getUniqueGlass() {
         return drinkRepository.findAll().stream().map(Drink::getGlassType).collect(Collectors.toSet());
     }
+
+    @Override
+    public Set<String> getUniqueCategory() {
+        return drinkRepository.findAll().stream().map(Drink::getCategory).collect(Collectors.toSet());
+    }
 }

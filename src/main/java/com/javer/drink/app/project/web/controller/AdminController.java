@@ -81,7 +81,7 @@ public class AdminController {
 
     private void addAttributes(Model model) {
         model.addAttribute("drinks", drinkService.getAllDrinks());
-        model.addAttribute("categories", drinkService.get(""));
+        model.addAttribute("categories", drinkService.getUniqueCategory());
         model.addAttribute("glasses", drinkService.getUniqueGlass());
         model.addAttribute("ingredients", ingredientService.getUniqueIngredientNames());
     }

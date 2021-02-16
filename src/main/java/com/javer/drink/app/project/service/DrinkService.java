@@ -17,4 +17,6 @@ public interface DrinkService {
     List<Drink> getAllDrinks();
 
     Set<String> getUniqueGlass();
+
+    Set<String> getUniqueCategory();
 }
