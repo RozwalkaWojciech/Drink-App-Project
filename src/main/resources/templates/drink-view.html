@@ -34,8 +34,8 @@
             <p> Add to favourites </p>
             <form th:action="@{/favourite-drink?name={name}(name=${drink.getName()})}"
                   th:object="${drink}"
-                  method="post" style="width: 49%; float: left">
-                <input class="btn2" type="submit" th:value="Add" style="float: right"/>
+                  method="post" style="width: auto">
+                <input class="btn2" type="submit" th:value="Add"/>
             </form>
         </div>
 
@@ -44,8 +44,8 @@
             <p> Remove from Favourites </p>
             <form th:action="@{/favourite-drink?name={name}(name=${drink.getName()})}"
                   th:object="${drink}"
-                  method="post" style="width: 49%; float: left">
-                <input class="btn2" type="submit" th:value="Remove" style="float: right"/>
+                  method="post" style="width: auto">
+                <input class="btn2" type="submit" th:value="Remove"/>
             </form>
         </div>
     </div>
