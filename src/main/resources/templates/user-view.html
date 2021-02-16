@@ -21,16 +21,16 @@
             <!--drink searcher-->
             <div th:replace="fragments/search :: search"></div>
 
-<!--            <form action="/drink" method="get">-->
-<!--                <input name="name" list="drink-names" class="search" type="text" placeholder="Search.."-->
-<!--                       onfocus="this.placeholder=''"-->
-<!--                       onblur="this.placeholder='Search...'" required autocomplete="off">-->
-<!--                <button type="submit"><i class="fa fa-search"></i></button>-->
-<!--            </form>-->
+            <!--            <form action="/drink" method="get">-->
+            <!--                <input name="name" list="drink-names" class="search" type="text" placeholder="Search.."-->
+            <!--                       onfocus="this.placeholder=''"-->
+            <!--                       onblur="this.placeholder='Search...'" required autocomplete="off">-->
+            <!--                <button type="submit"><i class="fa fa-search"></i></button>-->
+            <!--            </form>-->
 
-<!--            <datalist id="drink-names">-->
-<!--                <option th:each="drink : ${drinks}" th:value="${drink.getName()}">-->
-<!--            </datalist>-->
+            <!--            <datalist id="drink-names">-->
+            <!--                <option th:each="drink : ${drinks}" th:value="${drink.getName()}">-->
+            <!--            </datalist>-->
         </ul>
     </div>
 </nav>
@@ -64,26 +64,22 @@
                     <input class="btn2" type="submit" name="page" value="${page}">
                 </form>
             </li>
+        </ul>
+    </div>
 
-            <div class="gallery-wrapper">
-                <#if drinkList??>
-                <#list drinkList>
-                <#items as drink>
-
-                <figure class="gallery-item" style="padding: 5px">
-                    <img src=${drink.getImageUrl()} alt="image">
-                    <a href="Drink-view?name=${drink.getName()}">
-                        <figcaption>${drink.getName()}</figcaption>
-                    </a>
-                </figure>
-            </div>
+    <div class="gallery-wrapper">
+        <figure th:each="drink : ${drinks}" class="gallery-item" style="padding: 5px">
+            <img th:src="${drink.getImageUrl()}" alt="image">
+            <a href="Drink-view?name=${drink.getName()}">
+                <figcaption th:text="${drink.getName()}"></figcaption>
+            </a>
+        </figure>
+    </div>
 </section>
 
 <#include "add-favourite.ftlh">
 
 <#include "favourite-section.ftlh">
-
-<#include "category1.ftlh">
 
 <section class="statement">
     <div class="container">
