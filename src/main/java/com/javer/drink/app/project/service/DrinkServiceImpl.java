@@ -1,6 +1,5 @@
 package com.javer.drink.app.project.service;
 
-import com.javer.drink.app.project.model.Category;
 import com.javer.drink.app.project.model.Drink;
 import com.javer.drink.app.project.repository.DrinkRepository;
 import com.javer.drink.app.project.web.dto.DrinkDto;
@@ -37,9 +36,7 @@ public class DrinkServiceImpl implements DrinkService {
                     .glassType(drinkDto.getGlassType())
                     .modificationDate(String.valueOf(LocalDate.now()))
                     .imageUrl(drinkDto.getImageUrl())
-                    .category(Category.builder()
-                            .name(drinkDto.getCategory().getName())
-                            .build())
+                    .category(drinkDto.getCategory())
                     .ingredientList(drinkDto.getIngredientList().stream().map(IngredientDto::dtoToIngredient).collect(Collectors.toList()))
                     .build());
         }
