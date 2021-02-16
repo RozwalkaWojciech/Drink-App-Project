@@ -25,7 +25,7 @@ public class DrinkDto {
     private String glassType;
     private String modificationDate;
     private String imageUrl;
-    private CategoryDto category;
+    private String category;
     private List<IngredientDto> ingredientList;
 
     public static DrinkDto drinkToDto(Drink drink) {
@@ -39,7 +39,7 @@ public class DrinkDto {
         drinkDto.setGlassType(drink.getGlassType());
         drinkDto.setModificationDate(drink.getModificationDate());
         drinkDto.setImageUrl(drink.getImageUrl());
-        drinkDto.setCategory(CategoryDto.categoryToDto(drink.getCategory()));
+        drinkDto.setCategory(drink.getCategory());
 
         List<IngredientDto> ingredientDtoList = new ArrayList<>();
         drink.getIngredientList().forEach(ingredient -> {
@@ -60,7 +60,7 @@ public class DrinkDto {
         drink.setGlassType(drinkDTO.getGlassType());
         drink.setModificationDate(drinkDTO.getModificationDate());
         drink.setImageUrl(drinkDTO.getImageUrl());
-        drink.setCategory(CategoryDto.dtoToCategory(drinkDTO.getCategory()));
+        drink.setCategory(drinkDTO.getCategory());
 
         List<Ingredient> ingredientList = new ArrayList<>();
         drinkDTO.getIngredientList().forEach(ingredientDto -> {

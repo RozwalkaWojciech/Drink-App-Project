@@ -42,12 +42,11 @@ public class Drink {
     @Column(name = "modification_date")
     private String modificationDate;
 
+    @Column
+    private String category;
+
     @Column(name = "image_url", length = 1024)
     private String imageUrl;
-
-    @ManyToOne(cascade = {CascadeType.PERSIST})
-    @JoinTable(name = "drink_to_category")
-    private Category category;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(
