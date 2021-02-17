@@ -86,6 +86,11 @@ public class DrinkServiceImpl implements DrinkService {
 
     @Override
     public List<Drink> getRequestDrinkList(Integer pageNumber, Integer numberOfDrinks) {
-        return null;
+        int fromIndex = (pageNumber - 1) * numberOfDrinks;
+        int toIndex = pageNumber * numberOfDrinks;
+        if (toIndex > getAllDrinks().size()) {
+            toIndex = getAllDrinks().size();
+        }
+        return getAllDrinks().subList(fromIndex, toIndex);
     }
 }
