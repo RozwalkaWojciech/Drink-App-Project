@@ -19,4 +19,9 @@ public interface DrinkService {
     Set<String> getUniqueGlass();
 
     Set<String> getUniqueCategory();
+
+    List<Integer> countsPages();
+
+    List<Drink> getRequestDrinkList(Integer pageNumber, Integer numberOfDrinks);
+
 }

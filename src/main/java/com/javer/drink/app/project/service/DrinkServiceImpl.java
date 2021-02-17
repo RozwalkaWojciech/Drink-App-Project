@@ -71,4 +71,14 @@ public class DrinkServiceImpl implements DrinkService {
     public Set<String> getUniqueCategory() {
         return drinkRepository.findAll().stream().map(Drink::getCategory).collect(Collectors.toSet());
     }
+
+    @Override
+    public List<Integer> countsPages() {
+        return null;
+    }
+
+    @Override
+    public List<Drink> getRequestDrinkList(Integer pageNumber, Integer numberOfDrinks) {
+        return null;
+    }
 }
