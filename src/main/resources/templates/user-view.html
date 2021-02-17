@@ -70,7 +70,7 @@
     <div class="gallery-wrapper">
         <figure th:each="drink : ${drinks}" class="gallery-item" style="padding: 5px">
             <img th:src="${drink.getImageUrl()}" alt="image">
-            <a href="Drink-view?name=${drink.getName()}">
+            <a th:href="@{/drink?name={name}(name=${drink.getName()})}">
                 <figcaption th:text="${drink.getName()}"></figcaption>
             </a>
         </figure>
