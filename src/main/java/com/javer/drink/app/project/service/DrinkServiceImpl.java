@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -73,8 +74,14 @@ public class DrinkServiceImpl implements DrinkService {
     }
 
     @Override
-    public List<Integer> countsPages() {
-        return null;
+    public List<Integer> countsPages(Integer numberOfDrinks) {
+        int sizeOfDrinks = getAllDrinks().size();
+        List<Integer> pages = new ArrayList<>();
+        numberOfDrinks = sizeOfDrinks % numberOfDrinks == 0 ? sizeOfDrinks / 8 : sizeOfDrinks / 8 + 1;
+        for (int pageNumber = 1; pageNumber <= numberOfDrinks; pageNumber++) {
+            pages.add(pageNumber);
+        }
+        return pages;
     }
 
     @Override

@@ -20,7 +20,7 @@ public interface DrinkService {
 
     Set<String> getUniqueCategory();
 
-    List<Integer> countsPages();
+    List<Integer> countsPages(Integer numberOfDrinks);
 
     List<Drink> getRequestDrinkList(Integer pageNumber, Integer numberOfDrinks);
 
