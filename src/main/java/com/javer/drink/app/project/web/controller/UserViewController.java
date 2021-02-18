@@ -20,7 +20,8 @@ public class UserViewController {
     public String showUserView(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        model.addAttribute("drinks", drinkService.getAllDrinks());
-        model.addAttribute("drinks", drinkService.getRequestDrinkList(3,8));
+        model.addAttribute("pageNumbers", drinkService.countsPages(8));
+        model.addAttribute("drinks", drinkService.getRequestDrinkList(1, 8));
         model.addAttribute("user", userService.get(authentication.getName()));
         return "user-view";
     }

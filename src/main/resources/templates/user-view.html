@@ -56,12 +56,9 @@
 
     <div class="container">
         <ul class="social-links">
-            <#if pageNumber??>
-            <#list pageNumber>
-            <#items as page>
             <li style="margin-right: 20px; margin-left: 20px;">
                 <form method="get" action="User-view">
-                    <input class="btn2" type="submit" name="page" value="${page}">
+                    <input th:each="page : ${pageNumbers}" class="btn2" type="submit" name="page" th:value="${page}">
                 </form>
             </li>
         </ul>
