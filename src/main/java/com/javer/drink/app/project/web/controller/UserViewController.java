@@ -19,9 +19,11 @@ public class UserViewController {
     @GetMapping("/user-view")
     public String showUserView(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("drinks", drinkService.getAllDrinks());
         model.addAttribute("pageNumbers", drinkService.countsPages(8));
-        model.addAttribute("drinks", drinkService.getRequestDrinkList(1, 8));
+        model.addAttribute("requestDrinks", drinkService.getRequestDrinkList(1, 8));
         model.addAttribute("user", userService.get(authentication.getName()));
         return "user-view";
     }
+
 }
