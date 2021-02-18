@@ -74,11 +74,11 @@ public class DrinkServiceImpl implements DrinkService {
     }
 
     @Override
-    public List<Integer> countsPages(Integer numberOfDrinks) {
+    public List<Integer> countsPages(Integer drinksPerPage) {
         int sizeOfDrinks = getAllDrinks().size();
         List<Integer> pages = new ArrayList<>();
-        numberOfDrinks = sizeOfDrinks % numberOfDrinks == 0 ? sizeOfDrinks / numberOfDrinks : sizeOfDrinks / numberOfDrinks + 1;
-        for (int pageNumber = 1; pageNumber <= numberOfDrinks; pageNumber++) {
+        drinksPerPage = sizeOfDrinks % drinksPerPage == 0 ? sizeOfDrinks / drinksPerPage : sizeOfDrinks / drinksPerPage + 1;
+        for (int pageNumber = 1; pageNumber <= drinksPerPage; pageNumber++) {
             pages.add(pageNumber);
         }
         return pages;

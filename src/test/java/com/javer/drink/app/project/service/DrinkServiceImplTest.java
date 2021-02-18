@@ -1,34 +1,50 @@
 package com.javer.drink.app.project.service;
-import com.javer.drink.app.project.model.Message;
-import com.javer.drink.app.project.repository.MessageRepository;
+
+import com.javer.drink.app.project.model.Drink;
+import com.javer.drink.app.project.repository.DrinkRepository;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SpringBootTest
 class DrinkServiceImplTest {
 
     @Autowired
     DrinkService drinkService;
+    @Autowired
+    DrinkRepository drinkRepository;
+
+    Drink drink = new Drink();
+
+    @AfterEach
+    void after() {
+        drinkRepository.delete(drink);
+    }
 
     @Test
-    void shouldReturnEmptyList(){
+    void shouldReturnEmptyList() {
         //given
-        int numberOfDrinks = 8;
+        int drinksPerPage = 8;
         //when
-        List<Integer> returnList = drinkService.countsPages(numberOfDrinks);
+        List<Integer> returnList = drinkService.countsPages(drinksPerPage);
         //then
         assertTrue(returnList.isEmpty());
     }
 
+    @Test
+    void shouldReturnOnlyOneNumberPage() {
+        //given
+        int drinksPerPage = 8;
+        drinkRepository.save(drink);
+        //when
+        List<Integer> returnList = drinkService.countsPages(drinksPerPage);
+        //then
+        assertEquals(1, returnList.size());
+    }
 }
