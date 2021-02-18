@@ -56,9 +56,10 @@
 
     <div class="container">
         <ul class="social-links">
-            <li style="margin-right: 20px; margin-left: 20px;">
+            <li th:each="page : ${pageNumbers}"
+                style="margin-right: 20px; margin-left: 20px; width: 55px; height: 40px">
                 <form method="get" action="User-view">
-                    <input th:each="page : ${pageNumbers}" class="btn2" type="submit" name="page" th:value="${page}">
+                    <input class="btn2" type="submit" name="page" th:value="${page}">
                 </form>
             </li>
         </ul>
