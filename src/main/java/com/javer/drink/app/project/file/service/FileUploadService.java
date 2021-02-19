@@ -24,9 +24,13 @@ public class FileUploadService {
         return file;
     }
 
-    public String getUploadFilesPath() throws IOException {
+    public String getUploadFilesPath() {
         Properties settings = new Properties();
-        settings.load(Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("settings.properties")).openStream());
+        try (InputStream inputStream = Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("settings.properties")).openStream()) {
+            settings.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return settings.getProperty("Upload.Path");
     }
 }

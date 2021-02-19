@@ -25,19 +25,23 @@ public class FileParserService {
 
     public void parseDataToDatabase(File json) {
         List<DrinkAPI> drinkAPIList = parserService.parseFile(json);
-        int size = drinkAPIList.size();
-        int count = 0;
-        for (DrinkAPI drinkAPI : drinkAPIList) {
-            if (drinkService.getAllDrinks().stream().noneMatch(drink -> drink.getName().equals(drinkAPI.getName()))) {
-                count++;
-                Drink drink = Optional
-                        .ofNullable(drinkService.get(drinkAPI.getCategory()))
-                        .orElseGet(() -> drinkMapper.mapDrink(drinkAPI));
+        if (drinkAPIList != null) {
+            int size = drinkAPIList.size();
+            int count = 0;
+            for (DrinkAPI drinkAPI : drinkAPIList) {
+                if (drinkService.getAllDrinks().stream().noneMatch(drink -> drink.getName().equals(drinkAPI.getName()))) {
+                    count++;
+                    Drink drink = Optional
+                            .ofNullable(drinkService.get(drinkAPI.getCategory()))
+                            .orElseGet(() -> drinkMapper.mapDrink(drinkAPI));
 
-                drinkService.getAllDrinks().add(drinkMapper.mapDrink(drinkAPI));
-                drinkService.save(DrinkDto.drinkToDto(drink));
+                    drinkService.getAllDrinks().add(drinkMapper.mapDrink(drinkAPI));
+                    drinkService.save(DrinkDto.drinkToDto(drink));
+                }
             }
+            messageService.leaveMessage(1L, count + " items was parsed from " + size);
+        } else {
+            messageService.leaveMessage(1L, "The file wasn't loaded");
         }
-        messageService.leaveMessage(1L, count + " items was parsed from " + size);
     }
 }
