@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -52,9 +53,13 @@ public class DrinkDeserializer extends JsonDeserializer<DrinkAPI> {
         return drinkApi;
     }
 
-    private String getNewDatePattern() throws IOException {
+    private String getNewDatePattern() {
         Properties settings = new Properties();
-        settings.load(Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("settings.properties")).openStream());
+        try (InputStream inputStream = Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("settings.properties")).openStream()) {
+            settings.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return settings.getProperty("date.format");
     }
 }
