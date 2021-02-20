@@ -1,52 +1,50 @@
-var elem = document.querySelector('.quotes-wrapper');
-var flkty = new Flickity( elem, {
-  cellAlign: 'center',
-  contain: true
+let elem = document.querySelector('.quotes-wrapper');
+let flkty = new Flickity(elem, {
+    cellAlign: 'center',
+    contain: true
 });
 
-(function(){
-  'use strict';
-  
-  var navSelector = '.navigation';
-  var linksSelector = '.navigation a';
-  var scrollSpeed = 60;
-  
-  var timer, targetPosition;
+(function () {
+    'use strict';
 
-  function scroll() {
-    var delta = targetPosition - document.documentElement.scrollTop;
-    if (delta > 0) {
-      document.documentElement.scrollTop += Math.min(delta, scrollSpeed);
+    let navSelector = '.navigation';
+    let linksSelector = '.navigation a';
+    let scrollSpeed = 60;
+
+    let timer, targetPosition;
+
+    function scroll() {
+        let delta = targetPosition - document.documentElement.scrollTop;
+        if (delta > 0) {
+            document.documentElement.scrollTop += Math.min(delta, scrollSpeed);
+        } else if (delta < 0) {
+            document.documentElement.scrollTop += Math.max(delta, -scrollSpeed);
+        } else {
+            clearInterval(timer);
+        }
+
+        if (window.innerHeight >= document.documentElement.scrollHeight - document.documentElement.scrollTop) {
+            clearInterval(timer);
+        }
     }
-    else if (delta < 0) {
-      document.documentElement.scrollTop += Math.max(delta, -scrollSpeed);
+
+    let onLinkClick = function (event) {
+        event.preventDefault();
+        clearInterval(timer)
+
+        let navHeight = document.querySelector(navSelector).offsetHeight;
+        let target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            targetPosition = Math.max(0, target.offsetTop - navHeight);
+            scroll();
+            timer = setInterval(scroll, 1000 / 30);
+        }
+    };
+
+    let links = document.querySelectorAll(linksSelector);
+
+    for (let i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', onLinkClick);
     }
-    else {
-      clearInterval(timer);
-    }
-    
-    if(window.innerHeight >= document.documentElement.scrollHeight - document.documentElement.scrollTop) {
-      clearInterval(timer);
-    }
-  };
-  
-  var onLinkClick = function(event){
-    event.preventDefault();
-    clearInterval(timer)
-    
-    var navHeight = document.querySelector(navSelector).offsetHeight;
-    var target = document.querySelector(this.getAttribute('href'));
-    if(target){
-      targetPosition = Math.max(0, target.offsetTop - navHeight);
-      scroll();
-      timer = setInterval(scroll, 1000/30);
-    }
-  };
-  
-  var links = document.querySelectorAll(linksSelector);
-  
-  for(var i=0; i<links.length; i++){
-    links[i].addEventListener('click', onLinkClick);
-  }
-  
+
 })();

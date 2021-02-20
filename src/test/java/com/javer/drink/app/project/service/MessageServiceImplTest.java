@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MessageServiceImplTest {
@@ -23,11 +22,11 @@ class MessageServiceImplTest {
 
     @BeforeEach
     void init() {
-        message  = messageRepository.save(new Message(1L, "Test"));
+        message = messageRepository.save(new Message(1L, "Test"));
     }
 
     @AfterEach
-    void after(){
+    void after() {
         messageRepository.delete(message);
     }
 
@@ -37,14 +36,14 @@ class MessageServiceImplTest {
         Long testId = 2L;
         String testMessage = "Test2";
         //when
-        messageService.leaveMessage(testId,testMessage);
+        messageService.leaveMessage(testId, testMessage);
         //then
         assertThat(messageService.get(testId)).isPresent();
         assertThat(messageService.get(testId).orElseThrow().getInformation()).isEqualTo("Test2");
     }
 
     @Test
-    void shouldUpdateLeaveMessage(){
+    void shouldUpdateLeaveMessage() {
         //given
         Long id = 1L;
         String updateMessage = "Update";
@@ -55,7 +54,7 @@ class MessageServiceImplTest {
     }
 
     @Test
-    void shouldReturnEmptyMessage(){
+    void shouldReturnEmptyMessage() {
         //given
         Long id = 3L;
         //when
